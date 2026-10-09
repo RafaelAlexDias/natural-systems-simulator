@@ -50,7 +50,7 @@
 /* Application name at the bottom of the sidebar */
 .sidebar-footer {
     -fx-text-fill: #84949F;
-    -fx-font-size: 12px;
+    -fx-font-size: 16px;
     -fx-padding: 8px 0 0 0;
 }
 

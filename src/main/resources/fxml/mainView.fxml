@@ -45,7 +45,7 @@
             <!-- Keeps the application name at the bottom -->
             <VBox VBox.vgrow="ALWAYS"/>
 
-            <Label text="Natural-Systems-Simulator"
+            <Label text="Natural-Systems-Simulator, by Rafael Dias"
                    styleClass="sidebar-footer"
                    wrapText="true"/>
         </VBox>

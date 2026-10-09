@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.controller.HomeController"
+            styleClass="app-root">
+
+    <left>
+        <VBox styleClass="sidebar" spacing="18">
+            <padding>
+                <Insets top="32" right="24" bottom="24" left="24"/>
+            </padding>
+
+            <Label text="Home"
+                   styleClass="nav-button"
+                   maxWidth="Infinity"
+                   onMouseClicked="#showHome"/>
+
+            <Label text="Simulation"
+                   styleClass="nav-button"
+                   maxWidth="Infinity"
+                   onMouseClicked="#showSimulations"/>
+
+            <Label text="Settings"
+                   styleClass="nav-button"
+                   maxWidth="Infinity"
+                   onMouseClicked="#showSettings"/>
+
+            <Label text="About"
+                   styleClass="nav-button"
+                   maxWidth="Infinity"
+                   onMouseClicked="#showAbout"/>
+
+            <VBox VBox.vgrow="ALWAYS"/>
+
+            <Label text="Natural-Systems-Simulator"
+                   styleClass="sidebar-footer"
+                   wrapText="true"/>
+        </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    styleClass="content-scroll">
+            <VBox spacing="44" styleClass="home-content">
+                <padding>
+                    <Insets top="40" right="32" bottom="32" left="46"/>
+                </padding>
+
+                <VBox spacing="6">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Welcome to"
+                               styleClass="main-title"/>
+                        <Label text="Natural-Systems-Simulator"
+                               styleClass="main-title title-accent"/>
+                    </HBox>
+
+                    <Label text="Explore and run different simulations."
+                           styleClass="subtitle"/>
+
+                    <VBox spacing="28">
+                        <HBox alignment="CENTER_LEFT" spacing="20">
+                            <Label text="Available Simulations"
+                                   styleClass="section-title"/>
+
+                            <HBox HBox.hgrow="ALWAYS"/>
+
+                            <TextField fx:id="searchField"
+                                       promptText="Search Simulations..."
+                                       styleClass="search-field"
+                                       prefWidth="300"
+                                       onKeyReleased="#filterSimulations"/>
+                        </HBox>
+
+                        <TilePane fx:id="simulationGrid"
+                                  prefColumns="3"
+                                  hgap="28"
+                                  vgap="28"
+                                  tileAlignment="TOP_LEFT"
+                                  styleClass="simulation-grid"/>
+                    </VBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

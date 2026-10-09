@@ -1,10 +1,8 @@
-package mssn;
-
-import mssn.chaos_game.ChaosGame;
-import mssn.chaos_game.Pentagon_ChaosGame;
-import mssn.chaos_game.XSides_ChaosGame;
+import chaos_game.ChaosGame;
+import chaos_game.Pentagon_ChaosGame;
+import chaos_game.XSides_ChaosGame;
 import processing.core.PApplet;
-import mssn.setup.IProcessingApp;
+import setup.IProcessingApp;
 
 public class Main extends PApplet {
     private enum Mode {
@@ -21,7 +19,7 @@ public class Main extends PApplet {
     };
 
     public static void main(String[] args) {
-        PApplet.main("mssn.Main");
+        PApplet.main("Main");
     }
 
     @Override

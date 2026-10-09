@@ -1,4 +1,4 @@
-package mssn.setup;
+package setup;
 
 import processing.core.PApplet;
 

@@ -1,4 +1,4 @@
-package mssn.core;
+package core;
 
 public interface SimModule {
     String name();

@@ -1,0 +1,157 @@
+.app-root {
+    -fx-background-color: #11191D;
+    -fx-font-family: "Georgia";
+}
+
+/* Sidebar */
+
+.sidebar {
+    -fx-background-color: #1C252B;
+    -fx-pref-width: 249px;
+    -fx-min-width: 249px;
+    -fx-border-color: transparent #414D57 transparent transparent;
+    -fx-border-width: 0 2px 0 0;
+}
+
+/* Estilo base para os "rótulos" da navbar - parecem botões mas são Labels */
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #F4F4F4;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 23px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12px 14px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 2, 0.0, 0, 0);
+}
+
+/* Hover effect - azul claro ao passar o mouse */
+.nav-button:hover {
+    -fx-background-color: #293945;
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: null;
+}
+
+/* Estado ativo - retângulo azul ao redor (adicionado via controller) */
+.nav-button.active {
+    -fx-background-color: #254875;
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: null;
+}
+
+/* Quando o item for o primeiro (Home) SEM classe active - ele terá aparência normal */
+.nav-button:first-child:not(.active) {
+    -fx-background-color: transparent;
+    -fx-text-fill: #F4F4F4;
+}
+
+/* Efeito de foco (teclado) */
+.nav-button:focused {
+    -fx-background-color: #254875;
+    -fx-text-fill: #FFFFFF;
+}
+
+/* Contorno azul sutil no hover/selected */
+.nav-button:hover .label {
+    -fx-background-insets: 0, 0 0 5 0;
+    -fx-background-radius: 10, 10;
+}
+
+/* Footer da sidebar */
+.sidebar-footer {
+    -fx-text-fill: #AAB4BC;
+    -fx-font-size: 12px;
+}
+
+/* Conteúdo principal */
+
+.content-scroll {
+    -fx-background: #11191D;
+    -fx-background-color: #11191D;
+    -fx-border-color: transparent;
+}
+
+.content-scroll > .viewport {
+    -fx-background-color: #11191D;
+}
+
+.home-content {
+    -fx-background-color: #11191D;
+}
+
+.main-title {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-size: 38px;
+}
+
+.title-accent {
+    -fx-text-fill: #4D91CC;
+    -fx-font-size: 38px;
+}
+
+.subtitle {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-size: 23px;
+}
+
+.section-title {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-size: 28px;
+}
+
+/* Pesquisa */
+
+.search-field {
+    -fx-background-color: #1C252B;
+    -fx-text-fill: #F4F4F4;
+    -fx-prompt-text-fill: #BFC4C8;
+    -fx-font-size: 18px;
+    -fx-background-radius: 9px;
+    -fx-border-color: #29343B;
+    -fx-border-width: 2px;
+    -fx-border-radius: 9px;
+    -fx-padding: 9px 12px;
+}
+
+.search-field:focused {
+    -fx-border-color: #4D91CC;
+}
+
+/* Cartões */
+
+.simulation-card {
+    -fx-background-color: #1C252B;
+    -fx-border-color: #414D57;
+    -fx-border-width: 3px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 8px;
+    -fx-padding: 0;
+    -fx-spacing: 0;
+    -fx-cursor: hand;
+}
+
+.simulation-card:hover {
+    -fx-border-color: #4D91CC;
+    -fx-background-color: #222E36;
+}
+
+.card-image {
+    -fx-background-color: #172027;
+    -fx-background-radius: 6px 6px 0 0;
+}
+
+.card-title {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 19px;
+}
+
+.card-description {
+    -fx-text-fill: #E0E3E5;
+    -fx-font-size: 12px;
+}
+
+.card-placeholder {
+    -fx-text-fill: #87949E;
+    -fx-font-size: 15px;
+}

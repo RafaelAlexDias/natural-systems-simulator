@@ -1,8 +1,8 @@
-package mssn.chaos_game;
+package chaos_game;
 
 import processing.core.PApplet;
 import processing.core.PVector;
-import mssn.setup.IProcessingApp;
+import setup.IProcessingApp;
 
 import java.util.ArrayList;
 

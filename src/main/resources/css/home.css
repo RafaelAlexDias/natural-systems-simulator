@@ -1,78 +1,77 @@
+/* =========================================================
+   APPLICATION THEME
+   ========================================================= */
+
 .app-root {
     -fx-background-color: #11191D;
-    -fx-font-family: "Georgia";
+    -fx-font-family: "Segoe UI";
 }
 
-/* Sidebar */
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
 
 .sidebar {
-    -fx-background-color: #1C252B;
+    -fx-background-color: #192329;
     -fx-pref-width: 249px;
     -fx-min-width: 249px;
-    -fx-border-color: transparent #414D57 transparent transparent;
-    -fx-border-width: 0 2px 0 0;
+    -fx-border-color: transparent #303E47 transparent transparent;
+    -fx-border-width: 0 1px 0 0;
 }
 
-/* Estilo base para os "rótulos" da navbar - parecem botões mas são Labels */
+/* Base appearance for navigation items */
 .nav-button {
     -fx-background-color: transparent;
-    -fx-text-fill: #F4F4F4;
-    -fx-font-family: "Georgia";
-    -fx-font-size: 23px;
+    -fx-text-fill: #B8C5CE;
+    -fx-font-size: 19px;
+    -fx-font-weight: normal;
     -fx-alignment: CENTER_LEFT;
-    -fx-padding: 12px 14px;
-    -fx-background-radius: 10px;
+    -fx-padding: 13px 15px;
+    -fx-background-radius: 8px;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 2, 0.0, 0, 0);
 }
 
-/* Hover effect - azul claro ao passar o mouse */
+/* Highlight navigation items on hover */
 .nav-button:hover {
-    -fx-background-color: #293945;
+    -fx-background-color: #263640;
     -fx-text-fill: #FFFFFF;
-    -fx-effect: null;
 }
 
-/* Estado ativo - retângulo azul ao redor (adicionado via controller) */
+/* Highlight the currently selected navigation item */
 .nav-button.active {
-    -fx-background-color: #254875;
-    -fx-text-fill: #FFFFFF;
-    -fx-effect: null;
+    -fx-background-color: #233F56;
+    -fx-text-fill: #75B9F2;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent transparent transparent #4D91CC;
+    -fx-border-width: 0 0 0 3px;
+    -fx-background-radius: 0 8px 8px 0;
 }
 
-/* Quando o item for o primeiro (Home) SEM classe active - ele terá aparência normal */
-.nav-button:first-child:not(.active) {
-    -fx-background-color: transparent;
-    -fx-text-fill: #F4F4F4;
-}
-
-/* Efeito de foco (teclado) */
-.nav-button:focused {
-    -fx-background-color: #254875;
-    -fx-text-fill: #FFFFFF;
-}
-
-/* Contorno azul sutil no hover/selected */
-.nav-button:hover .label {
-    -fx-background-insets: 0, 0 0 5 0;
-    -fx-background-radius: 10, 10;
-}
-
-/* Footer da sidebar */
+/* Application name at the bottom of the sidebar */
 .sidebar-footer {
-    -fx-text-fill: #AAB4BC;
+    -fx-text-fill: #84949F;
     -fx-font-size: 12px;
+    -fx-padding: 8px 0 0 0;
 }
 
-/* Conteúdo principal */
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
 
 .content-scroll {
-    -fx-background: #11191D;
     -fx-background-color: #11191D;
+    -fx-background: #11191D;
     -fx-border-color: transparent;
+    -fx-padding: 0;
 }
 
+/* Keep the scrollable viewport consistent with the application */
 .content-scroll > .viewport {
+    -fx-background-color: #11191D;
+}
+
+/* Hide the decorative border around the scroll bar */
+.content-scroll > .corner {
     -fx-background-color: #11191D;
 }
 
@@ -80,78 +79,139 @@
     -fx-background-color: #11191D;
 }
 
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+/* Main page heading */
 .main-title {
-    -fx-text-fill: #F4F4F4;
-    -fx-font-size: 38px;
+    -fx-text-fill: #F1F5F8;
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
 }
 
+/* Accent color for the application name */
 .title-accent {
-    -fx-text-fill: #4D91CC;
-    -fx-font-size: 38px;
+    -fx-text-fill: #62A8E8;
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
 }
 
+/* Supporting text beneath the main heading */
 .subtitle {
-    -fx-text-fill: #F4F4F4;
-    -fx-font-size: 23px;
+    -fx-text-fill: #A9B8C2;
+    -fx-font-size: 17px;
 }
 
+/* Headings for individual content sections */
 .section-title {
-    -fx-text-fill: #F4F4F4;
-    -fx-font-size: 28px;
+    -fx-text-fill: #E8EEF2;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
 }
 
-/* Pesquisa */
+/* =========================================================
+   SEARCH FIELD
+   ========================================================= */
 
 .search-field {
-    -fx-background-color: #1C252B;
-    -fx-text-fill: #F4F4F4;
-    -fx-prompt-text-fill: #BFC4C8;
-    -fx-font-size: 18px;
+    -fx-background-color: #1B272E;
+    -fx-text-fill: #F1F5F8;
+    -fx-prompt-text-fill: #81919C;
+    -fx-font-size: 14px;
     -fx-background-radius: 9px;
-    -fx-border-color: #29343B;
-    -fx-border-width: 2px;
+    -fx-border-color: #34434D;
+    -fx-border-width: 1px;
     -fx-border-radius: 9px;
-    -fx-padding: 9px 12px;
+    -fx-padding: 11px 14px;
 }
 
-.search-field:focused {
-    -fx-border-color: #4D91CC;
-}
+/* =========================================================
+   SIMULATION CARDS
+   ========================================================= */
 
-/* Cartões */
-
+/* Base styling shared by all simulation cards */
 .simulation-card {
-    -fx-background-color: #1C252B;
-    -fx-border-color: #414D57;
-    -fx-border-width: 3px;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 8px;
+    -fx-background-color: #1B272E;
+    -fx-border-color: #34434D;
+    -fx-border-width: 1px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
     -fx-padding: 0;
     -fx-spacing: 0;
     -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.18), 8, 0, 0, 3);
 }
 
+/* Subtle highlight when the user hovers over a card */
 .simulation-card:hover {
+    -fx-background-color: #22323C;
     -fx-border-color: #4D91CC;
-    -fx-background-color: #222E36;
+    -fx-effect: dropshadow(three-pass-box, rgba(77, 145, 204, 0.18), 12, 0, 0, 3);
 }
 
+/* Container used for simulation thumbnails or previews */
 .card-image {
-    -fx-background-color: #172027;
-    -fx-background-radius: 6px 6px 0 0;
+    -fx-background-color: #162128;
+    -fx-background-radius: 11px 11px 0 0;
 }
 
+/* Simulation name displayed on each card */
 .card-title {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-size: 19px;
+    -fx-text-fill: #F1F5F8;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
 }
 
+/* Short description displayed below the title */
 .card-description {
-    -fx-text-fill: #E0E3E5;
-    -fx-font-size: 12px;
+    -fx-text-fill: #B2C0C9;
+    -fx-font-size: 13px;
 }
 
+/* Placeholder text shown when a preview is unavailable */
 .card-placeholder {
-    -fx-text-fill: #87949E;
-    -fx-font-size: 15px;
+    -fx-text-fill: #81919C;
+    -fx-font-size: 14px;
+}
+
+/* =========================================================
+   SIMULATION GRID
+   ========================================================= */
+
+
+/* Simulation cards layout */
+.simulation-grid {
+    -fx-padding: 0;
+    -fx-alignment: TOP_LEFT;
+}
+
+/* Card content */
+.simulation-card {
+    -fx-spacing: 0;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-overflow: hidden;
+}
+
+/* Preview area */
+.card-image {
+    -fx-alignment: CENTER;
+    -fx-min-height: 120px;
+    -fx-pref-height: 120px;
+}
+
+/* Run button */
+.card-button {
+    -fx-background-color: #294D69;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 12px;
+    -fx-background-radius: 7px;
+    -fx-cursor: hand;
+}
+
+.card-button:hover {
+    -fx-background-color: #35678F;
 }

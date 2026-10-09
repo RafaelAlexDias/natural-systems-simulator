@@ -6,82 +6,72 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Priority?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
+<!--
+    Main layout of the Natural-Systems-Simulator application.
+    The BorderPane separates the navigation sidebar from the main content.
+-->
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="ui.controller.HomeController"
             styleClass="app-root">
 
-    <left>
-        <VBox styleClass="sidebar" spacing="18">
-            <padding>
-                <Insets top="32" right="24" bottom="24" left="24"/>
-            </padding>
-
-            <Label text="Home"
-                   styleClass="nav-button"
-                   maxWidth="Infinity"
-                   onMouseClicked="#showHome"/>
-
-            <Label text="Simulation"
-                   styleClass="nav-button"
-                   maxWidth="Infinity"
-                   onMouseClicked="#showSimulations"/>
-
-            <Label text="Settings"
-                   styleClass="nav-button"
-                   maxWidth="Infinity"
-                   onMouseClicked="#showSettings"/>
-
-            <Label text="About"
-                   styleClass="nav-button"
-                   maxWidth="Infinity"
-                   onMouseClicked="#showAbout"/>
-
-            <VBox VBox.vgrow="ALWAYS"/>
-
-            <Label text="Natural-Systems-Simulator"
-                   styleClass="sidebar-footer"
-                   wrapText="true"/>
-        </VBox>
-    </left>
-
+    <!-- Center area: scrollable main content -->
     <center>
         <ScrollPane fitToWidth="true"
                     hbarPolicy="NEVER"
                     styleClass="content-scroll">
+
+            <!-- Main content container with consistent vertical spacing -->
             <VBox spacing="44" styleClass="home-content">
+
+                <!-- Controls the spacing between the content and the container edges -->
                 <padding>
                     <Insets top="40" right="32" bottom="32" left="46"/>
                 </padding>
 
-                <VBox spacing="6">
+                <!-- Page introduction and simulation section -->
+                <VBox spacing="10">
+
+                    <!-- Welcome message and application name -->
                     <HBox spacing="10" alignment="CENTER_LEFT">
                         <Label text="Welcome to"
                                styleClass="main-title"/>
+
                         <Label text="Natural-Systems-Simulator"
-                               styleClass="main-title title-accent"/>
+                               styleClass="title-accent"/>
                     </HBox>
 
+                    <!-- Short description of the application's purpose -->
                     <Label text="Explore and run different simulations."
                            styleClass="subtitle"/>
 
+                    <!-- Simulation section: heading, search field and grid -->
                     <VBox spacing="28">
+
+                        <!-- Section heading and simulation search field -->
                         <HBox alignment="CENTER_LEFT" spacing="20">
                             <Label text="Available Simulations"
                                    styleClass="section-title"/>
 
+                            <!-- Pushes the search field towards the right -->
                             <HBox HBox.hgrow="ALWAYS"/>
 
+                            <!--
+                                The controller can access this field through its fx:id
+                                to implement simulation filtering.
+                            -->
                             <TextField fx:id="searchField"
                                        promptText="Search Simulations..."
                                        styleClass="search-field"
-                                       prefWidth="300"
-                                       onKeyReleased="#filterSimulations"/>
+                                       prefWidth="300"/>
                         </HBox>
 
+                        <!--
+                            Container for simulation cards.
+                            The controller can populate it dynamically with simulation data.
+                        -->
                         <TilePane fx:id="simulationGrid"
                                   prefColumns="3"
                                   hgap="28"
@@ -93,4 +83,5 @@
             </VBox>
         </ScrollPane>
     </center>
+
 </BorderPane>

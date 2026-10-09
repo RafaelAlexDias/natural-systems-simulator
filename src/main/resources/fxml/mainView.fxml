@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- Main application layout with persistent navigation -->
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.controller.MainController"
+            styleClass="app-root">
+
+    <!-- Persistent navigation sidebar -->
+    <left>
+        <VBox styleClass="sidebar" spacing="12">
+            <padding>
+                <Insets top="32" right="20" bottom="24" left="20"/>
+            </padding>
+
+            <Label text="Home"
+                   fx:id="homeNav"
+                   styleClass="nav-button"
+                   maxWidth="Infinity"
+                   onMouseClicked="#showHome"/>
+
+            <Label text="Simulation"
+                   fx:id="simulationNav"
+                   styleClass="nav-button"
+                   maxWidth="Infinity"
+                   onMouseClicked="#showSimulations"/>
+
+            <Label text="Settings"
+                   fx:id="settingsNav"
+                   styleClass="nav-button"
+                   maxWidth="Infinity"
+                   onMouseClicked="#showSettings"/>
+
+            <Label text="About"
+                   fx:id="aboutNav"
+                   styleClass="nav-button"
+                   maxWidth="Infinity"
+                   onMouseClicked="#showAbout"/>
+
+            <!-- Keeps the application name at the bottom -->
+            <VBox VBox.vgrow="ALWAYS"/>
+
+            <Label text="Natural-Systems-Simulator"
+                   styleClass="sidebar-footer"
+                   wrapText="true"/>
+        </VBox>
+    </left>
+
+    <!-- The selected page is loaded into this container -->
+    <center>
+        <StackPane fx:id="contentArea"
+                   styleClass="content-area"/>
+    </center>
+
+</BorderPane>

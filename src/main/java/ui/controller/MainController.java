@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import ui.processing.ChaosGameLauncher;
+import ui.processing.ProcessingLauncher;
 
 import java.io.IOException;
 
@@ -52,6 +52,7 @@ public class MainController {
         navigateTo("/fxml/aboutView.fxml", aboutNav);
     }
 
+
     private void navigateTo(String fxmlPath, Label selectedItem) {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -62,19 +63,31 @@ public class MainController {
 
             Object controller = loader.getController();
 
-            // Permite à página inicial lançar simulações.
+            // Permite à Home abrir simulações Processing.
             if (controller instanceof HomeController homeController) {
                 homeController.setOnOpenSimulation(this::openSimulation);
             }
 
-            contentArea.getChildren().setAll(page);
+            if (controller instanceof SimulationController simulationController) {
+                simulationController.setOnOpenSimulation(this::openSimulation);
+            }
 
+            // Aplica o CSS específico da página, se existir.
+            String cssPath = fxmlPath
+                    .replace("/fxml/", "/css/")
+                    .replace("View.fxml", ".css");
+
+            var css = getClass().getResource(cssPath);
+
+            if (css != null && page instanceof javafx.scene.Parent parent) {
+                parent.getStylesheets().add(css.toExternalForm());
+            }
+
+            contentArea.getChildren().setAll(page);
             updateSelectedNavigation(selectedItem);
 
-        } catch (IOException exception) {
-            System.err.println(
-                    "Error loading view: " + fxmlPath
-            );
+        } catch (IOException | NullPointerException exception) {
+            System.err.println("Error loading view: " + fxmlPath);
             exception.printStackTrace();
         }
     }
@@ -106,6 +119,6 @@ public class MainController {
      * Launches the selected Processing simulation in a separate process.
      */
     private void openSimulation(String simulationId) {
-        ChaosGameLauncher.launch(simulationId);
+        ProcessingLauncher.launch(simulationId);
     }
 }

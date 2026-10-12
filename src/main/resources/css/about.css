@@ -1,0 +1,91 @@
+
+.about-root {
+    -fx-background-color: #11191D;
+    -fx-font-family: "Georgia";
+}
+
+.about-scroll,
+.about-scroll > .viewport {
+    -fx-background-color: #11191D;
+    -fx-border-color: transparent;
+}
+
+.about-content {
+    -fx-background-color: #11191D;
+}
+
+/* Header */
+
+.about-main-title {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-size: 34px;
+}
+
+.about-title-accent {
+    -fx-text-fill: #4D91CC;
+    -fx-font-size: 34px;
+}
+
+.about-subtitle {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-size: 20px;
+}
+
+/* Project information */
+
+.project-information {
+    -fx-padding: 4px 0 0 0;
+}
+
+.project-name {
+    -fx-text-fill: #4D91CC;
+    -fx-font-size: 29px;
+}
+
+.project-version {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-size: 21px;
+    -fx-padding: 2px 0 12px 0;
+}
+
+.author-label {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-size: 21px;
+}
+
+/* Disclaimer card */
+
+.disclaimer-card {
+    -fx-background-color: #1C252B;
+    -fx-border-color: #414D57;
+    -fx-border-width: 2.5px;
+    -fx-border-radius: 13px;
+    -fx-background-radius: 13px;
+    -fx-padding: 14px 12px;
+    -fx-min-height: 292px;
+}
+
+.disclaimer-title {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-size: 21px;
+}
+
+.disclaimer-text {
+    -fx-text-fill: #E0E3E5;
+    -fx-font-size: 13px;
+}
+
+/* Technology section */
+
+.built-with-title {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-size: 21px;
+}
+
+.technology-logos {
+    -fx-padding: 0 10px 0 10px;
+}
+
+.technology-logos .image-view {
+    -fx-opacity: 0.95;
+}

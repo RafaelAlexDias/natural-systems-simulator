@@ -2,20 +2,117 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      spacing="12"
-      styleClass="page-content">
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.controller.AboutController"
+            styleClass="about-root">
 
-    <padding>
-        <Insets top="40" right="32" bottom="32" left="46"/>
-    </padding>
+    <center>
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    styleClass="about-scroll">
 
-    <Label text="About"
-           styleClass="main-title"/>
+            <VBox spacing="42" styleClass="about-content">
+                <padding>
+                    <Insets top="30" right="32" bottom="30" left="48"/>
+                </padding>
 
-    <Label text="Some things about this project."
-           styleClass="subtitle"/>
+                <!-- Page heading -->
+                <VBox spacing="4">
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Label text="About"
+                               styleClass="about-main-title"/>
 
-</VBox>
+                        <Label text="Natural-Systems-Simulator"
+                               styleClass="about-title-accent"/>
+                    </HBox>
+
+                    <Label text="A collection of interactive simulations built with Java and Processing."
+                           styleClass="about-subtitle"
+                           wrapText="true"/>
+                </VBox>
+
+                <!-- Application information and disclaimer -->
+                <HBox spacing="36"
+                      alignment="TOP_LEFT"
+                      styleClass="about-details">
+
+                    <VBox spacing="12"
+                          HBox.hgrow="ALWAYS"
+                          styleClass="project-information">
+
+                        <Label text="Natural-Systems-Simulator"
+                               styleClass="project-name"
+                               wrapText="true"/>
+
+                        <Label text="Version 1.0.0"
+                               styleClass="project-version"/>
+
+                        <VBox spacing="2" styleClass="author-information">
+                            <Label text="Developed by"
+                                   styleClass="author-label"/>
+                            <Label text="Rafael Dias"
+                                   styleClass="author-label"/>
+                            <Label text="2026"
+                                   styleClass="author-label"/>
+                        </VBox>
+                    </VBox>
+
+                    <VBox spacing="8"
+                          styleClass="disclaimer-card"
+                          minWidth="260"
+                          prefWidth="334"
+                          maxWidth="380">
+
+                        <Label text="Disclaimer"
+                               styleClass="disclaimer-title"/>
+
+                        <Label text="This application was developed for educational and research purposes. No warranty is provided. Use it at your own risk."
+                               styleClass="disclaimer-text"
+                               wrapText="true"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Technology logos -->
+                <VBox spacing="20" styleClass="built-with-section">
+                    <Label text="Built with"
+                           styleClass="built-with-title"/>
+
+                    <HBox spacing="22"
+                          alignment="CENTER_LEFT"
+                          styleClass="technology-logos">
+
+                        <ImageView fx:id="javaLogo"
+                                   fitWidth="48"
+                                   fitHeight="58"
+                                   preserveRatio="true"
+                                   smooth="true"/>
+
+                        <ImageView fx:id="javafxLogo"
+                                   fitWidth="68"
+                                   fitHeight="58"
+                                   preserveRatio="true"
+                                   smooth="true"/>
+
+                        <ImageView fx:id="processingLogo"
+                                   fitWidth="54"
+                                   fitHeight="58"
+                                   preserveRatio="true"
+                                   smooth="true"/>
+
+                        <ImageView fx:id="gradleLogo"
+                                   fitWidth="58"
+                                   fitHeight="58"
+                                   preserveRatio="true"
+                                   smooth="true"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

@@ -1,21 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      spacing="12"
-      styleClass="page-content">
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.controller.SimulationController"
+            styleClass="simulation-page">
 
-    <padding>
-        <Insets top="40" right="32" bottom="32" left="46"/>
-    </padding>
+    <center>
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    styleClass="simulation-scroll">
 
-    <Label text="Simulation"
-           styleClass="main-title"/>
+            <VBox spacing="26" styleClass="simulation-content">
+                <padding>
+                    <Insets top="34" right="30" bottom="40" left="28"/>
+                </padding>
 
-    <Label text="Configure and run your simulations."
-           styleClass="subtitle"/>
+                <!-- Page heading -->
+                <VBox spacing="7">
+                    <Label text="Available Simulations"
+                           styleClass="simulation-page-title"/>
 
-</VBox>
+                    <Label text="Explore, search and run all available simulations."
+                           styleClass="simulation-page-subtitle"/>
+                </VBox>
+
+                <!-- Search and filter controls -->
+                <HBox spacing="12"
+                      alignment="CENTER_LEFT"
+                      styleClass="simulation-toolbar">
+
+                    <TextField fx:id="searchField"
+                               promptText="Search simulations..."
+                               styleClass="simulation-search"
+                               onKeyReleased="#filterSimulations"
+                               HBox.hgrow="ALWAYS"/>
+
+                    <Button text="☷  Filter"
+                            fx:id="filterButton"
+                            styleClass="filter-button"
+                            onAction="#showFilters"/>
+                </HBox>
+
+                <!-- Quick filters -->
+                <HBox spacing="10"
+                      alignment="CENTER_LEFT"
+                      styleClass="quick-filters">
+
+                    <Button text="All"
+                            onAction="#showAll"
+                            styleClass="filter-chip active-chip"
+                            fx:id="allButton"/>
+
+                    <Button text="Fractals"
+                            onAction="#showFractals"
+                            styleClass="filter-chip"
+                            fx:id="fractalsButton"/>
+
+                    <Button text="Chaos Game"
+                            onAction="#showChaosGame"
+                            styleClass="filter-chip"
+                            fx:id="chaosButton"/>
+
+                    <Button text="Recently Added"
+                            onAction="#showRecentlyAdded"
+                            styleClass="filter-chip"
+                            fx:id="recentButton"/>
+                </HBox>
+
+                <!-- Result count -->
+                <Label fx:id="resultsLabel"
+                       text="Available simulations"
+                       styleClass="results-label"/>
+
+                <!-- Dynamically populated simulation cards -->
+                <TilePane fx:id="simulationGrid"
+                          prefColumns="3"
+                          hgap="20"
+                          vgap="20"
+                          tileAlignment="TOP_LEFT"
+                          styleClass="simulation-grid"/>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

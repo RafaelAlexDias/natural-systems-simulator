@@ -1,0 +1,162 @@
+
+.simulation-page {
+    -fx-background-color: #11191D;
+    -fx-font-family: "Georgia";
+}
+
+.simulation-scroll,
+.simulation-scroll > .viewport {
+    -fx-background-color: #11191D;
+    -fx-border-color: transparent;
+}
+
+.simulation-content {
+    -fx-background-color: #11191D;
+}
+
+.simulation-page-title {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-size: 30px;
+}
+
+.simulation-page-subtitle {
+    -fx-text-fill: #BFC7CD;
+    -fx-font-size: 16px;
+}
+
+.simulation-toolbar {
+    -fx-spacing: 12px;
+}
+
+.simulation-search {
+    -fx-background-color: #1C252B;
+    -fx-text-fill: #F4F4F4;
+    -fx-prompt-text-fill: #AEB8C0;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 16px;
+    -fx-background-radius: 9px;
+    -fx-border-color: #29343B;
+    -fx-border-width: 2px;
+    -fx-border-radius: 9px;
+    -fx-padding: 10px 13px;
+}
+
+.simulation-search:focused {
+    -fx-border-color: #4D91CC;
+}
+
+.filter-button {
+    -fx-background-color: #1C252B;
+    -fx-text-fill: #F4F4F4;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 15px;
+    -fx-background-radius: 9px;
+    -fx-border-color: #414D57;
+    -fx-border-radius: 9px;
+    -fx-border-width: 1.5px;
+    -fx-padding: 10px 16px;
+    -fx-cursor: hand;
+}
+
+.filter-button:hover {
+    -fx-background-color: #293945;
+    -fx-border-color: #4D91CC;
+}
+
+/* Quick filter chips */
+
+.filter-chip {
+    -fx-background-color: #1C252B;
+    -fx-text-fill: #D8DEE3;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 13px;
+    -fx-background-radius: 16px;
+    -fx-border-color: #414D57;
+    -fx-border-radius: 16px;
+    -fx-padding: 7px 13px;
+    -fx-cursor: hand;
+}
+
+.filter-chip:hover {
+    -fx-background-color: #293945;
+}
+
+.filter-chip.active-chip {
+    -fx-background-color: #254875;
+    -fx-border-color: #386AA0;
+    -fx-text-fill: white;
+}
+
+.results-label {
+    -fx-text-fill: #AEB8C0;
+    -fx-font-size: 13px;
+}
+
+/* Simulation cards */
+
+.simulation-card {
+    -fx-background-color: #1C252B;
+    -fx-border-color: #414D57;
+    -fx-border-width: 2px;
+    -fx-border-radius: 9px;
+    -fx-background-radius: 8px;
+    -fx-padding: 0;
+    -fx-spacing: 0;
+    -fx-cursor: hand;
+}
+
+.simulation-card:hover {
+    -fx-border-color: #4D91CC;
+    -fx-background-color: #222E36;
+}
+
+.simulation-image-area {
+    -fx-background-color: #090D0F;
+    -fx-background-radius: 6px 6px 0 0;
+    -fx-alignment: center;
+    -fx-border-color: transparent transparent #414D57 transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.image-placeholder {
+    -fx-text-fill: #74838E;
+    -fx-font-size: 15px;
+}
+
+.simulation-card-details {
+    -fx-padding: 9px 11px 12px 11px;
+    -fx-spacing: 5px;
+}
+
+.simulation-card-title {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-size: 19px;
+}
+
+.simulation-card-category {
+    -fx-text-fill: #4D91CC;
+    -fx-font-size: 12px;
+}
+
+.simulation-card-description {
+    -fx-text-fill: #CFD5DA;
+    -fx-font-size: 12px;
+}
+
+.context-menu {
+    -fx-background-color: #1C252B;
+    -fx-border-color: #414D57;
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+    -fx-padding: 6px;
+}
+
+.context-menu .label {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 13px;
+}
+
+.context-menu .menu-item:focused {
+    -fx-background-color: #254875;
+}

@@ -4,6 +4,7 @@ package ui.processing;
 import chaos_game.ChaosGame;
 import chaos_game.Pentagon_ChaosGame;
 import chaos_game.XSides_ChaosGame;
+import dla.DLA;
 import processing.core.PApplet;
 import setup.IProcessingApp;
 
@@ -38,6 +39,11 @@ public class ProcessingSketch extends PApplet {
             case "x-sides-chaos-game" -> {
                 simulation = new XSides_ChaosGame();
                 surface.setTitle("MSSN — Chaos Game (Variable Sides)");
+            }
+
+            case "dla-simulation" -> {
+                simulation = new DLA();
+                surface.setTitle("MSSN - DLA");
             }
 
             default -> {

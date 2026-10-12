@@ -2,7 +2,7 @@ package ui.processing;
 
 import processing.core.PApplet;
 
-public class ChaosGameProcessMain {
+public class ProcessingMain {
 
     public static void main(String[] args) {
         if (args.length == 0) {

@@ -4,9 +4,9 @@ package ui.processing;
 import java.io.File;
 import java.io.IOException;
 
-public final class ChaosGameLauncher {
+public final class ProcessingLauncher {
 
-    private ChaosGameLauncher() {
+    private ProcessingLauncher() {
     }
 
     public static void launch(String simulationId) {
@@ -22,7 +22,7 @@ public final class ChaosGameLauncher {
                 javaExecutable,
                 "-cp",
                 classpath,
-                ChaosGameProcessMain.class.getName(),
+                ProcessingMain.class.getName(),
                 simulationId
         );
 

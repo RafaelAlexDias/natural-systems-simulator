@@ -30,11 +30,13 @@
                    maxWidth="Infinity"
                    onMouseClicked="#showSimulations"/>
 
+            <!--
             <Label text="Settings"
                    fx:id="settingsNav"
                    styleClass="nav-button"
                    maxWidth="Infinity"
                    onMouseClicked="#showSettings"/>
+            -->
 
             <Label text="About"
                    fx:id="aboutNav"

@@ -43,7 +43,13 @@ public class HomeController {
                             + "Press a number key to change the shape.",
                     "⬡",
                     "x-sides-chaos-game"
-            )
+            ),
+            new SimulationInfo(
+                    "Dla",
+                    "Description",
+                    "DLA",
+                    "dla-simulation"
+    )
     );
 
     @FXML

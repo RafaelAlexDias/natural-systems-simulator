@@ -1,13 +1,15 @@
-
 package ui.controller;
 
+import core.Log;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import ui.util.Images;
 
-import java.net.URL;
+import java.lang.System.Logger;
 
 public class AboutController {
+
+    private static final Logger LOG = Log.get(AboutController.class);
 
     @FXML
     private ImageView javaLogo;
@@ -30,10 +32,13 @@ public class AboutController {
     }
 
     private void loadLogo(ImageView imageView, String resourcePath) {
-        URL resource = getClass().getResource(resourcePath);
-
-        if (resource != null) {
-            imageView.setImage(new Image(resource.toExternalForm()));
-        }
+        Images.load(getClass(), resourcePath).ifPresentOrElse(
+                imageView::setImage,
+                () -> LOG.log(
+                        Logger.Level.WARNING,
+                        "Logo not found on classpath: {0}",
+                        resourcePath
+                )
+        );
     }
 }

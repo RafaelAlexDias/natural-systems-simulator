@@ -6,6 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
@@ -17,14 +18,14 @@
                     hbarPolicy="NEVER"
                     styleClass="about-scroll">
 
-            <VBox spacing="42" styleClass="about-content">
+            <VBox spacing="38" styleClass="about-content">
                 <padding>
-                    <Insets top="30" right="32" bottom="30" left="48"/>
+                    <Insets top="40" right="36" bottom="40" left="48"/>
                 </padding>
 
                 <!-- Page heading -->
-                <VBox spacing="4">
-                    <HBox spacing="8" alignment="CENTER_LEFT">
+                <VBox spacing="6" styleClass="about-header">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
                         <Label text="About"
                                styleClass="about-main-title"/>
 
@@ -38,13 +39,17 @@
                 </VBox>
 
                 <!-- Application information and disclaimer -->
-                <HBox spacing="36"
+                <HBox spacing="28"
                       alignment="TOP_LEFT"
                       styleClass="about-details">
 
-                    <VBox spacing="12"
+                    <!-- Project card -->
+                    <VBox spacing="14"
                           HBox.hgrow="ALWAYS"
-                          styleClass="project-information">
+                          styleClass="info-card project-card">
+
+                        <Label text="Project"
+                               styleClass="card-eyebrow"/>
 
                         <Label text="Natural-Systems-Simulator"
                                styleClass="project-name"
@@ -53,24 +58,27 @@
                         <Label text="Version 1.0.0"
                                styleClass="project-version"/>
 
-                        <VBox spacing="2" styleClass="author-information">
+                        <Region prefHeight="1" styleClass="card-separator"/>
+
+                        <VBox spacing="3" styleClass="author-information">
                             <Label text="Developed by"
-                                   styleClass="author-label"/>
+                                   styleClass="author-label-muted"/>
                             <Label text="Rafael Dias"
-                                   styleClass="author-label"/>
+                                   styleClass="author-name"/>
                             <Label text="2026"
-                                   styleClass="author-label"/>
+                                   styleClass="author-label-muted"/>
                         </VBox>
                     </VBox>
 
-                    <VBox spacing="8"
+                    <!-- Disclaimer card -->
+                    <VBox spacing="10"
                           styleClass="disclaimer-card"
-                          minWidth="260"
-                          prefWidth="334"
-                          maxWidth="380">
+                          minWidth="280"
+                          prefWidth="360"
+                          maxWidth="400">
 
                         <Label text="Disclaimer"
-                               styleClass="disclaimer-title"/>
+                               styleClass="disclaimer-eyebrow"/>
 
                         <Label text="This application was developed for educational and research purposes. No warranty is provided. Use it at your own risk."
                                styleClass="disclaimer-text"
@@ -79,37 +87,49 @@
                 </HBox>
 
                 <!-- Technology logos -->
-                <VBox spacing="20" styleClass="built-with-section">
+                <VBox spacing="18" styleClass="built-with-section">
                     <Label text="Built with"
                            styleClass="built-with-title"/>
 
-                    <HBox spacing="22"
+                    <HBox spacing="18"
                           alignment="CENTER_LEFT"
                           styleClass="technology-logos">
 
-                        <ImageView fx:id="javaLogo"
-                                   fitWidth="48"
-                                   fitHeight="58"
-                                   preserveRatio="true"
-                                   smooth="true"/>
+                        <VBox styleClass="tech-tile" alignment="CENTER" spacing="8">
+                            <ImageView fx:id="javaLogo"
+                                       fitWidth="44"
+                                       fitHeight="54"
+                                       preserveRatio="true"
+                                       smooth="true"/>
+                            <Label text="Java" styleClass="tech-caption"/>
+                        </VBox>
 
-                        <ImageView fx:id="javafxLogo"
-                                   fitWidth="68"
-                                   fitHeight="58"
-                                   preserveRatio="true"
-                                   smooth="true"/>
+                        <VBox styleClass="tech-tile" alignment="CENTER" spacing="8">
+                            <ImageView fx:id="javafxLogo"
+                                       fitWidth="62"
+                                       fitHeight="54"
+                                       preserveRatio="true"
+                                       smooth="true"/>
+                            <Label text="JavaFX" styleClass="tech-caption"/>
+                        </VBox>
 
-                        <ImageView fx:id="processingLogo"
-                                   fitWidth="54"
-                                   fitHeight="58"
-                                   preserveRatio="true"
-                                   smooth="true"/>
+                        <VBox styleClass="tech-tile" alignment="CENTER" spacing="8">
+                            <ImageView fx:id="processingLogo"
+                                       fitWidth="50"
+                                       fitHeight="54"
+                                       preserveRatio="true"
+                                       smooth="true"/>
+                            <Label text="Processing" styleClass="tech-caption"/>
+                        </VBox>
 
-                        <ImageView fx:id="gradleLogo"
-                                   fitWidth="58"
-                                   fitHeight="58"
-                                   preserveRatio="true"
-                                   smooth="true"/>
+                        <VBox styleClass="tech-tile" alignment="CENTER" spacing="8">
+                            <ImageView fx:id="gradleLogo"
+                                       fitWidth="54"
+                                       fitHeight="54"
+                                       preserveRatio="true"
+                                       smooth="true"/>
+                            <Label text="Gradle" styleClass="tech-caption"/>
+                        </VBox>
                     </HBox>
                 </VBox>
             </VBox>

@@ -1,22 +1,29 @@
-
 package ui.processing;
 
-import chaos_game.ChaosGame;
-import chaos_game.Pentagon_ChaosGame;
-import chaos_game.XSides_ChaosGame;
-import dla.DLA;
+import core.AppInfo;
+import core.Log;
+import core.Simulation;
+import core.Simulations;
 import processing.core.PApplet;
+import processing.core.PImage;
 import setup.IProcessingApp;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.System.Logger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+
+/**
+ * Host sketch that dispatches the input events to a single
+ * {@link IProcessingApp} selected from {@link Simulations}.
+ */
 public class ProcessingSketch extends PApplet {
 
-    private static String simulationId;
+    private static final Logger LOG = Log.get(ProcessingSketch.class);
 
     private IProcessingApp simulation;
-
-    public static void setSimulationId(String id) {
-        simulationId = id;
-    }
 
     @Override
     public void settings() {
@@ -25,38 +32,47 @@ public class ProcessingSketch extends PApplet {
 
     @Override
     public void setup() {
-        switch (simulationId) {
-            case "chaos-game" -> {
-                simulation = new ChaosGame();
-                surface.setTitle("MSSN — Chaos Game (Triangle)");
-            }
+        String simulationId = args != null && args.length > 0 ? args[0] : null;
 
-            case "pentagon-chaos-game" -> {
-                simulation = new Pentagon_ChaosGame();
-                surface.setTitle("MSSN — Chaos Game (Pentagon)");
-            }
+        Simulation selected = Simulations.byId(simulationId).orElse(null);
 
-            case "x-sides-chaos-game" -> {
-                simulation = new XSides_ChaosGame();
-                surface.setTitle("MSSN — Chaos Game (Variable Sides)");
-            }
-
-            case "dla-simulation" -> {
-                simulation = new DLA();
-                surface.setTitle("MSSN - DLA");
-            }
-
-            default -> {
-                System.err.println(
-                        "Unknown simulation ID: " + simulationId
-                );
-                exit();
-                return;
-            }
+        if (selected == null || !selected.isRunnable()) {
+            LOG.log(Logger.Level.ERROR, "Unknown simulation id: {0}", simulationId);
+            exit();
+            return;
         }
+
+        simulation = selected.create();
+        surface.setTitle("MSSN \u2014 " + selected.name());
+        applyWindowIcon();
 
         background(255);
         simulation.setup(this);
+
+        LOG.log(Logger.Level.DEBUG, "Started simulation: {0}", selected.id());
+    }
+
+    /**
+     * Copies the bundled icon to a temporary file so it can be loaded through
+     * Processing's file based {@code loadImage} and applied to the window.
+     */
+    private void applyWindowIcon() {
+        try (InputStream stream = getClass().getResourceAsStream(AppInfo.ICON_RESOURCE)) {
+            if (stream == null) {
+                return;
+            }
+
+            Path iconFile = Files.createTempFile("mssn-icon", ".png");
+            iconFile.toFile().deleteOnExit();
+            Files.copy(stream, iconFile, StandardCopyOption.REPLACE_EXISTING);
+
+            PImage icon = loadImage(iconFile.toAbsolutePath().toString());
+            if (icon != null) {
+                getSurface().setIcon(icon);
+            }
+        } catch (IOException | RuntimeException exception) {
+            LOG.log(Logger.Level.DEBUG, "Could not set window icon", exception);
+        }
     }
 
     @Override

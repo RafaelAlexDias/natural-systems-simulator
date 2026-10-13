@@ -1,7 +1,10 @@
+/* =========================================================
+   ABOUT PAGE
+   ========================================================= */
 
 .about-root {
     -fx-background-color: #11191D;
-    -fx-font-family: "Georgia";
+    -fx-font-family: "Segoe UI";
 }
 
 .about-scroll,
@@ -14,78 +17,144 @@
     -fx-background-color: #11191D;
 }
 
-/* Header */
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.about-header {
+    -fx-padding: 0 0 4px 0;
+}
 
 .about-main-title {
-    -fx-text-fill: #F4F4F4;
+    -fx-text-fill: #F1F5F8;
     -fx-font-size: 34px;
+    -fx-font-weight: bold;
 }
 
 .about-title-accent {
-    -fx-text-fill: #4D91CC;
+    -fx-text-fill: #62A8E8;
     -fx-font-size: 34px;
+    -fx-font-weight: bold;
 }
 
 .about-subtitle {
-    -fx-text-fill: #F4F4F4;
-    -fx-font-size: 20px;
+    -fx-text-fill: #9FB0BB;
+    -fx-font-size: 16px;
 }
 
-/* Project information */
+/* =========================================================
+   INFO CARDS
+   ========================================================= */
 
-.project-information {
-    -fx-padding: 4px 0 0 0;
+.info-card {
+    -fx-background-color: linear-gradient(to bottom right, #1E2A33, #141D23);
+    -fx-background-radius: 14px;
+    -fx-border-color: #2C3B45;
+    -fx-border-radius: 14px;
+    -fx-border-width: 1px;
+    -fx-padding: 22px 24px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.32), 16, 0, 0, 6);
+}
+
+.info-card:hover {
+    -fx-border-color: #4D91CC;
+    -fx-effect: dropshadow(gaussian, rgba(77, 145, 204, 0.22), 18, 0, 0, 6);
+}
+
+.project-card {
+    -fx-min-width: 320px;
+}
+
+.card-eyebrow {
+    -fx-text-fill: #62A8E8;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
 }
 
 .project-name {
-    -fx-text-fill: #4D91CC;
-    -fx-font-size: 29px;
+    -fx-text-fill: #F1F5F8;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
 }
 
 .project-version {
-    -fx-text-fill: #F4F4F4;
-    -fx-font-size: 21px;
-    -fx-padding: 2px 0 12px 0;
+    -fx-text-fill: #A9B8C2;
+    -fx-font-size: 15px;
+    -fx-padding: 0 0 4px 0;
 }
 
-.author-label {
-    -fx-text-fill: #F4F4F4;
-    -fx-font-size: 21px;
+.card-separator {
+    -fx-background-color: #2C3B45;
+    -fx-min-height: 1px;
+    -fx-max-height: 1px;
 }
 
-/* Disclaimer card */
-
-.disclaimer-card {
-    -fx-background-color: #1C252B;
-    -fx-border-color: #414D57;
-    -fx-border-width: 2.5px;
-    -fx-border-radius: 13px;
-    -fx-background-radius: 13px;
-    -fx-padding: 14px 12px;
-    -fx-min-height: 292px;
-}
-
-.disclaimer-title {
-    -fx-text-fill: #F4F4F4;
-    -fx-font-size: 21px;
-}
-
-.disclaimer-text {
-    -fx-text-fill: #E0E3E5;
+.author-label-muted {
+    -fx-text-fill: #8194A0;
     -fx-font-size: 13px;
 }
 
-/* Technology section */
+.author-name {
+    -fx-text-fill: #E8EEF2;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* Disclaimer variant: keeps the full rounded box, only the accent changes */
+
+.disclaimer-card {
+    -fx-background-color: linear-gradient(to bottom right, #1E2A33, #141D23);
+    -fx-background-radius: 14px;
+    -fx-border-color: #2C3B45;
+    -fx-border-radius: 14px;
+    -fx-border-width: 1px;
+    -fx-padding: 22px 24px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.32), 16, 0, 0, 6);
+}
+
+.disclaimer-eyebrow {
+    -fx-font-size: 18px;
+    -fx-text-fill: #D9A441;
+}
+
+.disclaimer-text {
+    -fx-text-fill: #C7D1D8;
+    -fx-font-size: 14px;
+    -fx-line-spacing: 4px;
+}
+
+/* =========================================================
+   TECHNOLOGIES
+   ========================================================= */
 
 .built-with-title {
-    -fx-text-fill: #F4F4F4;
-    -fx-font-size: 21px;
+    -fx-text-fill: #E8EEF2;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
 }
 
-.technology-logos {
-    -fx-padding: 0 10px 0 10px;
+.tech-tile {
+    -fx-background-color: #1B272E;
+    -fx-background-radius: 14px;
+    -fx-border-color: #2C3B45;
+    -fx-border-radius: 14px;
+    -fx-border-width: 1px;
+    -fx-padding: 16px 22px;
+    -fx-min-width: 108px;
 }
 
-.technology-logos .image-view {
-    -fx-opacity: 0.95;
+.tech-tile:hover {
+    -fx-background-color: #22323C;
+    -fx-border-color: #4D91CC;
+    -fx-effect: dropshadow(gaussian, rgba(77, 145, 204, 0.22), 14, 0, 0, 4);
+}
+
+.tech-tile .image-view {
+    -fx-opacity: 0.96;
+}
+
+.tech-caption {
+    -fx-text-fill: #B2C0C9;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
 }

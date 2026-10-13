@@ -1,25 +1,28 @@
-import chaos_game.ChaosGame;
-import chaos_game.Pentagon_ChaosGame;
-import chaos_game.XSides_ChaosGame;
+import core.Simulation;
+import core.Simulations;
 import processing.core.PApplet;
 import setup.IProcessingApp;
 
-public class Main extends PApplet {
-    private enum Mode {
-        MENU, CHAOS_TRIANGLE, CHAOS_PENTAGON, CHAOS_XSIDES
-    }
+import java.util.List;
 
-    private Mode mode = Mode.MENU;
+/**
+ * Standalone Processing menu, useful to run the sketches without the JavaFX
+ * shell. The real application entry point is {@code ui.MainApp}; this class
+ * simply reuses {@link Simulations} instead of duplicating the dispatch logic.
+ */
+public class Main extends PApplet {
+
+    private static final List<String> MENU_IDS = List.of(
+            "chaos-game",
+            "pentagon-chaos-game",
+            "x-sides-chaos-game",
+            "dla-simulation"
+    );
+
     private IProcessingApp currentSim;
 
-    private final String[] menuOptions = {
-            "1: Chaos Game - Triangle (Sierpinski)",
-            "2: Chaos Game - Pentagon (no repeat previous vertex)",
-            "3: Chaos Game - X-Sides (press 5-9 to change)"
-    };
-
     public static void main(String[] args) {
-        PApplet.main("Main");
+        PApplet.main(Main.class, args);
     }
 
     @Override
@@ -29,18 +32,17 @@ public class Main extends PApplet {
 
     @Override
     public void setup() {
-        surface.setTitle("MSSN — Natural Systems Simulator");
+        surface.setTitle("MSSN \u2014 Natural Systems Simulator");
     }
 
     @Override
     public void draw() {
-        if (mode == Mode.MENU) {
+        if (currentSim == null) {
             drawMenu();
-        } else {
-            if (currentSim != null) {
-                currentSim.draw(this, frameRate > 0 ? 1.0f / frameRate : 0f);
-            }
+            return;
         }
+
+        currentSim.draw(this, frameRate > 0 ? 1.0f / frameRate : 0f);
     }
 
     private void drawMenu() {
@@ -48,89 +50,80 @@ public class Main extends PApplet {
         textAlign(CENTER, CENTER);
         fill(255);
         textSize(28);
-        text("MSSN — Natural Systems Simulator", width / 2f, height / 2f - 80);
+        text("MSSN \u2014 Natural Systems Simulator", width / 2f, height / 2f - 80);
         textSize(18);
         fill(220);
         text("Select a simulation:", width / 2f, height / 2f - 30);
         textSize(16);
         fill(200);
-        for (int i = 0; i < menuOptions.length; i++) {
-            text(menuOptions[i], width / 2f, height / 2f + 20 + i * 30);
+
+        for (int i = 0; i < MENU_IDS.size(); i++) {
+            text((i + 1) + ": " + nameOf(i), width / 2f, height / 2f + 20 + i * 30);
         }
+
         textSize(14);
         fill(180);
-        text("Press 1, 2, or 3 to start. Press - to return to menu.", width / 2f, height - 60);
+        text(
+                "Press 1-" + MENU_IDS.size() + " to start. Press - to return to menu.",
+                width / 2f,
+                height - 60
+        );
+    }
+
+    private String nameOf(int index) {
+        return Simulations.byId(MENU_IDS.get(index))
+                .map(Simulation::name)
+                .orElse(MENU_IDS.get(index));
     }
 
     @Override
     public void keyPressed() {
-        if (mode == Mode.MENU) {
-            switch (key) {
-                case '1':
-                    startSimulation(Mode.CHAOS_TRIANGLE);
-                    break;
-                case '2':
-                    startSimulation(Mode.CHAOS_PENTAGON);
-                    break;
-                case '3':
-                    startSimulation(Mode.CHAOS_XSIDES);
-                    break;
-                default:
-                    break;
+        if (currentSim == null) {
+            int index = key - '1';
+
+            if (index >= 0 && index < MENU_IDS.size()) {
+                startSimulation(MENU_IDS.get(index));
             }
-        } else {
-            if (key == '-') {
-                returnToMenu();
-                return;
-            }
-            if (currentSim != null) {
-                currentSim.keyPressed(this);
-            }
+            return;
         }
+
+        if (key == '-') {
+            returnToMenu();
+            return;
+        }
+
+        currentSim.keyPressed(this);
+    }
+
+    private void startSimulation(String simulationId) {
+        Simulation simulation = Simulations.byId(simulationId).orElse(null);
+
+        if (simulation == null || !simulation.isRunnable()) {
+            return;
+        }
+
+        currentSim = simulation.create();
+        surface.setTitle(simulation.name());
+        background(255);
+        currentSim.setup(this);
+    }
+
+    private void returnToMenu() {
+        currentSim = null;
+        surface.setTitle("MSSN \u2014 Natural Systems Simulator");
     }
 
     @Override
     public void mousePressed() {
-        if (mode != Mode.MENU && currentSim != null) {
+        if (currentSim != null) {
             currentSim.mousePressed(this);
         }
     }
 
     @Override
     public void mouseDragged() {
-        if (mode != Mode.MENU && currentSim != null) {
+        if (currentSim != null) {
             currentSim.mouseDragged(this);
         }
-    }
-
-    private void startSimulation(Mode simMode) {
-        mode = simMode;
-        background(255);
-        switch (simMode) {
-            case CHAOS_TRIANGLE:
-                surface.setTitle("Chaos Game - Triangle");
-                currentSim = new ChaosGame();
-                currentSim.setup(this);
-                break;
-            case CHAOS_PENTAGON:
-                surface.setTitle("Chaos Game - Pentagon");
-                currentSim = new Pentagon_ChaosGame();
-                currentSim.setup(this);
-                break;
-            case CHAOS_XSIDES:
-                surface.setTitle("Chaos Game - X-Sides (5-9)");
-                currentSim = new XSides_ChaosGame();
-                currentSim.setup(this);
-                break;
-            default:
-                mode = Mode.MENU;
-                break;
-        }
-    }
-
-    private void returnToMenu() {
-        mode = Mode.MENU;
-        surface.setTitle("MSSN — Natural Systems Simulator");
-        currentSim = null;
     }
 }

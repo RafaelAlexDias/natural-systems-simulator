@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
@@ -47,30 +46,16 @@
                     <Label text="Explore and run different simulations."
                            styleClass="subtitle"/>
 
-                    <!-- Simulation section: heading, search field and grid -->
+                    <!-- Simulation section: heading and grid -->
                     <VBox spacing="28">
 
-                        <!-- Section heading and simulation search field -->
-                        <HBox alignment="CENTER_LEFT" spacing="20">
-                            <Label text="Available Simulations"
-                                   styleClass="section-title"/>
-
-                            <!-- Pushes the search field towards the right -->
-                            <HBox HBox.hgrow="ALWAYS"/>
-
-                            <!--
-                                The controller can access this field through its fx:id
-                                to implement simulation filtering.
-                            -->
-                            <TextField fx:id="searchField"
-                                       promptText="Search Simulations..."
-                                       styleClass="search-field"
-                                       prefWidth="300"/>
-                        </HBox>
+                        <!-- Section heading -->
+                        <Label text="Latest Simulations Added"
+                               styleClass="section-title"/>
 
                         <!--
                             Container for simulation cards.
-                            The controller can populate it dynamically with simulation data.
+                            The controller fills it with the most recent simulations.
                         -->
                         <TilePane fx:id="simulationGrid"
                                   prefColumns="3"

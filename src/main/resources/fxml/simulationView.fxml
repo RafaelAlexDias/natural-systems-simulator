@@ -58,7 +58,7 @@
 
                     <Button text="All"
                             onAction="#showAll"
-                            styleClass="filter-chip active-chip"
+                            styleClass="filter-chip"
                             fx:id="allButton"/>
 
                     <Button text="Fractals"
@@ -70,6 +70,16 @@
                             onAction="#showChaosGame"
                             styleClass="filter-chip"
                             fx:id="chaosButton"/>
+
+                    <Button text="AA"
+                            onAction="#showAutonomousAgents"
+                            styleClass="filter-chip"
+                            fx:id="aaButton"/>
+
+                    <Button text="Physics"
+                            onAction="#showPhysics"
+                            styleClass="filter-chip"
+                            fx:id="physicsButton"/>
 
                     <Button text="Recently Added"
                             onAction="#showRecentlyAdded"

@@ -5,79 +5,71 @@ import processing.core.PVector;
 
 import java.util.List;
 
+/**
+ * A single particle of the Diffusion-Limited Aggregation simulation.
+ *
+ * <p>A walker is either wandering randomly or stopped (stuck to the cluster).
+ * When a wandering walker gets close enough to any stopped walker it freezes.
+ */
 public class Walker {
 
-	// Estados de um Walker
-	public enum State {
-		STOPPED,
-		WANDER
-	}
+    public enum State {
+        STOPPED,
+        WANDER
+    }
 
-	// Posição de um Walker
-	private PVector pos;
+    private static final int RADIUS = 5;
+    private static final float CENTER_PULL = 0.0002f;
 
-	// Raio de um Walker
-	private final int radius = 5;
+    private final PVector pos;
+    private State state;
 
-	// Estado atual de um Walker
-	private State state;
+    /** Creates a stopped walker at a fixed position (a cluster seed). */
+    public Walker(int x, int y) {
+        this.pos = new PVector(x, y);
+        this.state = State.STOPPED;
+    }
 
-	// Método para obter o estado atual de um Walker
-	public State getState() {
-		return state;
-	}
+    /** Creates a wandering walker at a random position. */
+    public Walker(PApplet p) {
+        this.pos = new PVector(p.random(p.width), p.random(p.height));
+        this.state = State.WANDER;
+    }
 
-	// Método para atualizar o estado de um Walker com base na interação com outros Walkers
-	public void updateState(List<Walker> walkers) {
-		// Se o estado for STOPPED, não há necessidade de verificar
-		if (state == State.STOPPED) return;
+    public State getState() {
+        return state;
+    }
 
-		// Loop através de outros Walkers
-		for (Walker w : walkers) {
-			// Verifica se o Walker atual está parado
-			if (w.state == State.STOPPED) {
-				// Calcula a distância entre os Walkers
-				float dist = PVector.dist(pos, w.pos);
-				// Se a distância for menor que duas vezes o raio, define o estado como STOPPED
-				if (dist < 2 * radius) {
-					state = State.STOPPED;
-					break;
-				}
-			}
-		}
-	}
+    /** Stops this walker if it touches any stopped walker in the cluster. */
+    public void updateState(List<Walker> walkers) {
+        if (state == State.STOPPED) {
+            return;
+        }
 
-	// Construtor para criar um Walker parado em uma posição específica
-	public Walker(PApplet p, int x, int y) {
-		pos = new PVector(x, y);
-		state = State.STOPPED;
-	}
+        for (Walker other : walkers) {
+            boolean touching = other.state == State.STOPPED
+                    && PVector.dist(pos, other.pos) < 2 * RADIUS;
 
-	// Construtor para criar um Walker em uma posição aleatória para movimento aleatório
-	public Walker(PApplet p) {
-		pos = new PVector(p.random(p.width), p.random(p.height));
-		state = State.WANDER;
-	}
+            if (touching) {
+                state = State.STOPPED;
+                return;
+            }
+        }
+    }
 
-	// Método para o movimento aleatório
-	public void wander(PApplet p) {
-		if (state == State.WANDER) {
-			PVector step = PVector.random2D();
-			pos.add(step);
-			pos.lerp(new PVector(p.width / 2, p.height / 2), 0.0002f);
-			pos.x = PApplet.constrain(pos.x, 0, p.width);
-			pos.y = PApplet.constrain(pos.y, 0, p.height);
-		}
-	}
+    /** Performs one random step, slightly biased towards the centre. */
+    public void wander(PApplet p) {
+        if (state != State.WANDER) {
+            return;
+        }
 
-	// Método para desenhar um Walker
-	public void display(PApplet p) {
-		p.circle(pos.x, pos.y, radius * 2);
-	}
+        pos.add(PVector.random2D());
+        pos.lerp(new PVector(p.width / 2f, p.height / 2f), CENTER_PULL);
+        pos.x = PApplet.constrain(pos.x, 0, p.width);
+        pos.y = PApplet.constrain(pos.y, 0, p.height);
+    }
 
-	public boolean isEquals(Walker w){
-		return this.pos==w.pos && this.state==w.state;
-	}
+    public void display(PApplet p) {
+        p.circle(pos.x, pos.y, RADIUS * 2);
+    }
 }
-
-

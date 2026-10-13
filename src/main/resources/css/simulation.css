@@ -1,7 +1,10 @@
+/* =========================================================
+   SIMULATION PAGE
+   ========================================================= */
 
 .simulation-page {
     -fx-background-color: #11191D;
-    -fx-font-family: "Georgia";
+    -fx-font-family: "Segoe UI";
 }
 
 .simulation-scroll,
@@ -14,149 +17,219 @@
     -fx-background-color: #11191D;
 }
 
+/* =========================================================
+   HEADER
+   ========================================================= */
+
 .simulation-page-title {
-    -fx-text-fill: #F4F4F4;
-    -fx-font-size: 30px;
+    -fx-text-fill: #F1F5F8;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
 }
 
 .simulation-page-subtitle {
-    -fx-text-fill: #BFC7CD;
-    -fx-font-size: 16px;
+    -fx-text-fill: #9FB0BB;
+    -fx-font-size: 15px;
 }
+
+/* =========================================================
+   TOOLBAR / SEARCH
+   ========================================================= */
 
 .simulation-toolbar {
     -fx-spacing: 12px;
 }
 
 .simulation-search {
-    -fx-background-color: #1C252B;
-    -fx-text-fill: #F4F4F4;
-    -fx-prompt-text-fill: #AEB8C0;
-    -fx-font-family: "Georgia";
-    -fx-font-size: 16px;
-    -fx-background-radius: 9px;
-    -fx-border-color: #29343B;
-    -fx-border-width: 2px;
-    -fx-border-radius: 9px;
-    -fx-padding: 10px 13px;
+    -fx-background-color: #1B272E;
+    -fx-text-fill: #F1F5F8;
+    -fx-prompt-text-fill: #8194A0;
+    -fx-font-size: 15px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #2C3B45;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-padding: 11px 15px;
 }
 
 .simulation-search:focused {
     -fx-border-color: #4D91CC;
+    -fx-effect: dropshadow(gaussian, rgba(77, 145, 204, 0.25), 8, 0, 0, 0);
 }
 
+/* =========================================================
+   FILTER BUTTON
+   ========================================================= */
+
 .filter-button {
-    -fx-background-color: #1C252B;
-    -fx-text-fill: #F4F4F4;
-    -fx-font-family: "Georgia";
-    -fx-font-size: 15px;
-    -fx-background-radius: 9px;
-    -fx-border-color: #414D57;
-    -fx-border-radius: 9px;
-    -fx-border-width: 1.5px;
-    -fx-padding: 10px 16px;
+    -fx-background-color: linear-gradient(to bottom, #2A4152, #22323C);
+    -fx-background-insets: 0;
+    -fx-text-fill: #E8EEF2;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-border-color: #3A4D5A;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+    -fx-padding: 11px 18px;
     -fx-cursor: hand;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 .filter-button:hover {
-    -fx-background-color: #293945;
+    -fx-background-color: linear-gradient(to bottom, #33536B, #294154);
     -fx-border-color: #4D91CC;
+    -fx-effect: dropshadow(gaussian, rgba(77, 145, 204, 0.30), 10, 0, 0, 2);
 }
 
-/* Quick filter chips */
+.filter-button:pressed {
+    -fx-background-color: #1E2E3A;
+}
+
+/* =========================================================
+   QUICK FILTER CHIPS
+   ========================================================= */
 
 .filter-chip {
-    -fx-background-color: #1C252B;
-    -fx-text-fill: #D8DEE3;
-    -fx-font-family: "Georgia";
+    -fx-background-color: #1B272E;
+    -fx-background-insets: 0;
+    -fx-text-fill: #C7D1D8;
     -fx-font-size: 13px;
-    -fx-background-radius: 16px;
-    -fx-border-color: #414D57;
-    -fx-border-radius: 16px;
-    -fx-padding: 7px 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 18px;
+    -fx-border-color: #2C3B45;
+    -fx-border-radius: 18px;
+    -fx-border-width: 1px;
+    -fx-padding: 8px 16px;
     -fx-cursor: hand;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 .filter-chip:hover {
-    -fx-background-color: #293945;
+    -fx-background-color: #22323C;
+    -fx-border-color: #4D91CC;
+    -fx-text-fill: #F1F5F8;
 }
 
 .filter-chip.active-chip {
     -fx-background-color: #254875;
-    -fx-border-color: #386AA0;
-    -fx-text-fill: white;
+    -fx-border-color: #4D91CC;
+    -fx-text-fill: #FFFFFF;
 }
 
 .results-label {
-    -fx-text-fill: #AEB8C0;
+    -fx-text-fill: #8194A0;
     -fx-font-size: 13px;
 }
 
-/* Simulation cards */
+/* =========================================================
+   FILTER CONTEXT MENU
+   ========================================================= */
+
+.context-menu {
+    -fx-background-color: #162128;
+    -fx-border-color: #2C3B45;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-padding: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 18, 0, 0, 8);
+}
+
+.context-menu .label {
+    -fx-text-fill: #E8EEF2;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+}
+
+.context-menu .menu-item {
+    -fx-background-radius: 8px;
+    -fx-padding: 8px 16px 8px 12px;
+}
+
+.context-menu .menu-item:focused {
+    -fx-background-color: #254875;
+}
+
+.context-menu .menu-item:focused .label {
+    -fx-text-fill: #FFFFFF;
+}
+
+.context-menu .menu-item:disabled .label {
+    -fx-text-fill: #6C7C87;
+    -fx-font-size: 11px;
+}
+
+.context-menu .radio-menu-item:checked .label {
+    -fx-text-fill: #75B9F2;
+    -fx-font-weight: bold;
+}
+
+.context-menu .separator:horizontal {
+    -fx-padding: 6px 0 6px 0;
+}
+
+.context-menu .separator:horizontal .line {
+    -fx-border-color: #2C3B45 transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+}
+
+/* =========================================================
+   SIMULATION CARDS
+   ========================================================= */
 
 .simulation-card {
-    -fx-background-color: #1C252B;
-    -fx-border-color: #414D57;
-    -fx-border-width: 2px;
-    -fx-border-radius: 9px;
-    -fx-background-radius: 8px;
+    -fx-background-color: #1B272E;
+    -fx-border-color: #2C3B45;
+    -fx-border-width: 1px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
     -fx-padding: 0;
     -fx-spacing: 0;
     -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.28), 12, 0, 0, 4);
 }
 
 .simulation-card:hover {
     -fx-border-color: #4D91CC;
-    -fx-background-color: #222E36;
+    -fx-background-color: #22323C;
+    -fx-effect: dropshadow(gaussian, rgba(77, 145, 204, 0.25), 16, 0, 0, 5);
 }
 
 .simulation-image-area {
-    -fx-background-color: #090D0F;
-    -fx-background-radius: 6px 6px 0 0;
+    -fx-background-color: #0C1216;
+    -fx-background-radius: 11px 11px 0 0;
     -fx-alignment: center;
-    -fx-border-color: transparent transparent #414D57 transparent;
+    -fx-border-color: transparent transparent #2C3B45 transparent;
     -fx-border-width: 0 0 1px 0;
 }
 
 .image-placeholder {
     -fx-text-fill: #74838E;
     -fx-font-size: 15px;
+    -fx-font-weight: bold;
 }
 
 .simulation-card-details {
-    -fx-padding: 9px 11px 12px 11px;
+    -fx-padding: 12px 14px 14px 14px;
     -fx-spacing: 5px;
 }
 
 .simulation-card-title {
-    -fx-text-fill: #F4F4F4;
-    -fx-font-size: 19px;
+    -fx-text-fill: #F1F5F8;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
 }
 
 .simulation-card-category {
-    -fx-text-fill: #4D91CC;
+    -fx-text-fill: #62A8E8;
     -fx-font-size: 12px;
+    -fx-font-weight: bold;
 }
 
 .simulation-card-description {
-    -fx-text-fill: #CFD5DA;
+    -fx-text-fill: #B2C0C9;
     -fx-font-size: 12px;
-}
-
-.context-menu {
-    -fx-background-color: #1C252B;
-    -fx-border-color: #414D57;
-    -fx-border-radius: 7px;
-    -fx-background-radius: 7px;
-    -fx-padding: 6px;
-}
-
-.context-menu .label {
-    -fx-text-fill: #F4F4F4;
-    -fx-font-family: "Georgia";
-    -fx-font-size: 13px;
-}
-
-.context-menu .menu-item:focused {
-    -fx-background-color: #254875;
+    -fx-line-spacing: 2px;
 }

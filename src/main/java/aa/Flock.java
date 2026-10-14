@@ -8,11 +8,24 @@ import tools.SubPlot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A group of boids that flock together using separation, alignment, and cohesion.
+ */
 public class Flock {
     private List<Boid> boids;
     private int nboids;
 
-    // Construtor de um "Flock"
+    /**
+     * Creates a flock of boids with the specified steering behaviors.
+     *
+     * @param nboids the number of boids in the flock
+     * @param mass the mass of each boid
+     * @param radius the radius of each boid
+     * @param color the fill color of each boid
+     * @param sacWeights the weights for separation, alignment, and cohesion
+     * @param p the Processing applet
+     * @param plt the subplot for coordinate mapping
+     */
     public Flock(int nboids, float mass, float radius, int color, float[] sacWeights,
                  PApplet p, SubPlot plt) {
         this.nboids = nboids;
@@ -33,12 +46,21 @@ public class Flock {
         }
     }
 
-    // Método para obter a lista de "Boids"
+    /**
+     * Returns the list of boids in this flock.
+     *
+     * @return the boids
+     */
     public List<Boid> getBoids() {
         return this.boids;
     }
 
-    // Método que converte uma lista de "Boids" em uma lista de "Bodies"
+    /**
+     * Converts a list of boids into a list of bodies for vision tracking.
+     *
+     * @param boids the boids to convert
+     * @return the equivalent list of bodies
+     */
     private List<Body> boidList2BodyList(List<Boid> boids) {
         List<Body> bodies = new ArrayList<Body>();
         for(Boid b : boids) {
@@ -47,7 +69,11 @@ public class Flock {
         return bodies;
     }
 
-    // Método para aplicar comportamentos em um "Flock"
+    /**
+     * Applies all behaviors to every boid in the flock.
+     *
+     * @param dt the time step
+     */
     public void applyBehavior(float dt) {
         for(Boid b : boids) {
             b.applyBehaviors(dt);
@@ -55,17 +81,28 @@ public class Flock {
     }
 
 
-    // Método que obtém o número total de "Boids" em um "Flock"
+    /**
+     * Returns the total number of boids in the flock.
+     *
+     * @return the boid count
+     */
     public int getNBoids() {
         return this.nboids;
     }
 
-    // Método que obtém um "Boid" específico de uma lista
+    /**
+     * Returns the boid at the given index.
+     *
+     * @param i the index of the boid
+     * @return the boid at that index
+     */
     public Boid getBoid(int i) {
         return boids.get(i);
     }
 
-    // Método "display" de um "Flock"
+    /**
+     * Draws every boid in the flock.
+     */
     public void display(PApplet p, SubPlot plt) {
         for (Boid b :boids) {
             b.display(p, plt);

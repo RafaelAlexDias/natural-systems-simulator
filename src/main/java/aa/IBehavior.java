@@ -2,11 +2,30 @@ package aa;
 
 import processing.core.PVector;
 
+/**
+ * Contract for steering behaviors that compute a desired velocity for a boid
+ * and expose a configurable weight.
+ */
 public interface IBehavior {
-    // Método para obter a velocidade desejada com base no objeto Boid fornecido
+    /**
+     * Computes the desired velocity for the given boid.
+     *
+     * @param me the boid applying this behavior
+     * @return the desired velocity vector
+     */
     public PVector getDesiredVelocity(Boid me);
-    // Método para definir o peso do comportamento
+
+    /**
+     * Sets the weight of this behavior.
+     *
+     * @param weight the new steering weight
+     */
     public void setWeight(float weight);
-    // Método para obter o peso do comportamento
+
+    /**
+     * Gets the weight of this behavior.
+     *
+     * @return the current steering weight
+     */
     public float getWeight();
 }

@@ -5,6 +5,10 @@ import processing.core.PVector;
 import setup.IProcessingApp;
 import tools.SubPlot;
 
+/**
+ * A ball falling under gravity through air and then water, showing the effect of
+ * each fluid's drag. The fall time is printed once it reaches the bottom.
+ */
 public class FallingBodyApp implements IProcessingApp {
     public static final float dimX = 20;
     public static final float dimY = 15;
@@ -22,7 +26,7 @@ public class FallingBodyApp implements IProcessingApp {
 
     @Override
     public void setup(PApplet parent) {
-        // Inicialização de um "SubPlot", um "Body", dois tipos de fluído: "Water" e "Air" e um timer
+        // Create the subplot, the ball, the two fluids and the timer.
         plt = new SubPlot(window, viewport, parent.width, parent.height);
         ball = new Body(new PVector(0, 12), new PVector(8, 6),
                     mass, radius, parent.color(255, 255, 0));
@@ -33,42 +37,39 @@ public class FallingBodyApp implements IProcessingApp {
 
     @Override
     public void draw(PApplet parent, float dt) {
-        // Aplica as forças à bola
+        // Apply gravity to the ball.
         PVector f = new PVector(0, mass*g);
         ball.applyForce(f);
-        //  Verificaca se a bola está dentro de água
+        //  Check whether the ball is inside the water.
         if (water.isInside(ball)) {
-            // Se tiver, aplica a força de atrito da água
+            // Inside the water, apply the water drag.
             f = water.drag(ball);
         }
         else {
-            // Se não tiver, aplica a força de atrito do ar
+            // Outside the water, apply the air drag.
             f = air.drag(ball);
         }
         ball.applyForce(f);
-        // Move da bola
+        // Move the ball.
         ball.move(speedUp*dt);
-        // Display da água e da bola
+        // Draw the water and the ball.
         water.display(parent, plt);
         ball.display(parent, plt);
-        // Atualização do timer
+        // Advance the timer.
         timer += (speedUp * dt);
-        // Se a bola chegar ao fundo da água, para e exibe o timer
+        // When the ball reaches the bottom, stop and print the elapsed time.
         if (ball.pos.y < 0) {
             parent.noLoop();
             System.out.println(timer);
         }
     }
 
-    // Método para fazer algo quando uma determinada tecla é pressionada
     @Override
     public void keyPressed(PApplet parent) {}
 
-    // Método para fazer algo quando o rato é pressionado
     @Override
     public void mousePressed(PApplet parent) {}
 
-    // Método para fazer algo quando o rato é arrastado
     @Override
     public void mouseDragged(PApplet parent) {}
 }

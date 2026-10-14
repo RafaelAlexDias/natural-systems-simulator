@@ -9,6 +9,10 @@ import tools.SubPlot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * App demonstrating a single boid seeking a target, with keyboard controls for
+ * increasing or decreasing the boid's maximum speed.
+ */
 public class BoidAceleradorTravaoApp implements IProcessingApp {
     private Boid b;
     private double[] window = {-10, 10, -10, 10};
@@ -17,48 +21,50 @@ public class BoidAceleradorTravaoApp implements IProcessingApp {
     private Body target;
     private List<Body> allTrackingBodies;
 
+    /**
+     * Sets up the simulation: subplot, boid, target, and vision.
+     */
     @Override
     public void setup(PApplet parent) {
-        // Setup SubPlot
         plt = new SubPlot(window, viewport, parent.width, parent.height);
-        // Setup Boid
         b = new Boid(new PVector(), 1, 0.5f, parent.color(0), parent, plt);
         b.addBehavior(new Seek(1f));
-        // Setup Target
         target = new Body(new PVector(), new PVector(), 1f, 0.2f, parent.color(255, 0, 0));
         allTrackingBodies = new ArrayList<Body>();
         allTrackingBodies.add(target);
-        // Setup Eye
         Eye eye = new Eye(b, allTrackingBodies);
         b.setEye(eye);
     }
 
+    /**
+     * Updates and renders the simulation each frame.
+     */
     @Override
     public void draw(PApplet parent, float dt) {
-        // Limpeza da window
         parent.background(255);
-        // Aplicar os comportamentos
         b.applyBehaviors(dt);
-        // Display do Boid e do Target
         b.display(parent, plt);
         target.display(parent, plt);
     }
 
+    /**
+     * Handles key press events to adjust boid speed.
+     */
     @Override
     public void keyPressed(PApplet parent) {
-        // Caso a tecla '+' seja pressionada, a velocidade do Boid é aumentada
         if (parent.key == '+') {
             b.increaseSpeed();
         }
-        // Caso a tecla '-' seja pressionada, a velocidade do Boid é diminuída
         else if (parent.key == '-') {
             b.decreaseSpeed();
         }
     }
 
+    /**
+     * Moves the target to the mouse position on mouse press.
+     */
     @Override
     public void mousePressed(PApplet parent) {
-        // Ao clicarmos com o mouse na window, a posição do target vai ser alterada
         double[] ww = plt.getWorldCoord(parent.mouseX, parent.mouseY);
         target.setPos(new PVector((float) ww[0], (float) ww[1]));
     }

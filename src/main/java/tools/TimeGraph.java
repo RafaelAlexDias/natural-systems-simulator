@@ -2,6 +2,14 @@ package tools;
 
 import processing.core.PApplet;
 
+/**
+ * Plots one or more time series inside a {@link SubPlot}.
+ *
+ * <p>Each series has an associated colour and remembers its last plotted pixel,
+ * so successive {@link #plot(float, float, int)} calls can be joined by line
+ * segments. The graph background and a horizontal reference line are drawn when
+ * the instance is created.
+ */
 public class TimeGraph {
 
     private SubPlot plt;
@@ -9,16 +17,19 @@ public class TimeGraph {
     private int[] color;
     private float[][] last;
 
+    /** Creates a single-series graph drawn in the given colour. */
     public TimeGraph(PApplet p, SubPlot plt, int color, float ref) {
         this.color = new int[1];
         this.color[0] = color;
         initGraph(p, plt, this.color, ref);
     }
 
+    /** Creates a graph with one series per entry of {@code color}. */
     public TimeGraph(PApplet p, SubPlot plt, int[] color, float ref) {
         initGraph(p, plt, color, ref);
     }
 
+    /** Draws the background and reference line and resets the last points. */
     private void initGraph(PApplet p, SubPlot plt, int[] color, float ref) {
         this.p = p;
         this.plt = plt;
@@ -44,10 +55,12 @@ public class TimeGraph {
         p.popStyle();
     }
 
+    /** Plots a point on the first series. */
     public void plot(float t, float y) {
         plot(t, y, 0);
     }
 
+    /** Plots a point on series {@code ix}, joining it to the previous point. */
     public void plot(float t, float y, int ix) {
         if (t>plt.getWindow()[1] || y>plt.getWindow()[3]) {
             return;

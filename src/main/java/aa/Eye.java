@@ -8,6 +8,10 @@ import tools.SubPlot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Vision system for a boid. Tracks candidate bodies, computes which of them
+ * fall within far and near sight ranges, and exposes the current target.
+ */
 public class Eye {
     private List<Body> allTrackingBodies;
     private List<Body> farSight;
@@ -15,38 +19,71 @@ public class Eye {
     private Boid me;
     protected Body target;
 
-    // Construtor de um "Eye"
+    /**
+     * Creates an eye for the given boid, tracking the provided bodies.
+     * The first body in the list becomes the initial target.
+     *
+     * @param me the boid that owns this eye
+     * @param allTrackingBodies the bodies this eye can observe
+     */
     public Eye(Boid me, List<Body> allTrackingBodies) {
         this.me = me;
         this.allTrackingBodies = allTrackingBodies;
         target = allTrackingBodies.get(0);
     }
 
+    /**
+     * Creates a new eye for a boid by copying the tracked bodies and target
+     * from another eye.
+     *
+     * @param me the boid that owns this new eye
+     * @param eye the eye to copy tracking data from
+     */
     public Eye(Boid me, Eye eye) {
         allTrackingBodies = eye.allTrackingBodies;
         this.me = me;
         target = eye.target;
     }
 
+    /**
+     * Returns the list of all bodies this eye tracks.
+     *
+     * @return the tracked bodies
+     */
     public List<Body> getAllTrackingBodies() {
         return this.allTrackingBodies;
     }
 
+    /**
+     * Sets the list of bodies this eye tracks.
+     *
+     * @param allTrackingBodies the new list of tracked bodies
+     */
     public void setAllTrackingBodies(List<Body> allTrackingBodies) {
         this.allTrackingBodies = allTrackingBodies;
     }
 
-    // Método para obter a lista de corpos vistos a uma longa distância
+    /**
+     * Returns the bodies currently seen within far vision range.
+     *
+     * @return the list of bodies in far sight
+     */
     public List<Body> getFarSight() {
         return farSight;
     }
 
-    // Método para obter a lista de corpos vistos a uma curta distância
+    /**
+     * Returns the bodies currently seen within near (safe) vision range.
+     *
+     * @return the list of bodies in near sight
+     */
     public List<Body> getNearSight() {
         return nearSight;
     }
 
-    // Método para "olhar" e determinar quais corpos estão na visão
+    /**
+     * Updates the far and near sight lists based on the boid's current vision.
+     */
     public void look() {
         farSight = new ArrayList<Body>();
         nearSight = new ArrayList<Body>();
@@ -60,7 +97,14 @@ public class Eye {
         }
     }
 
-    // Método para verificar se um ponto está na visão com base na maxDistance e no maxAngle
+    /**
+     * Checks whether a point is within the given distance and angle of view.
+     *
+     * @param t the point to test
+     * @param maxDistance the maximum viewing distance
+     * @param maxAngle the maximum viewing angle
+     * @return true if the point is visible
+     */
     public boolean inSight(PVector t, float maxDistance, float maxAngle) {
         PVector r = PVector.sub(t, me.getPos());
         float d = r.mag();
@@ -68,16 +112,31 @@ public class Eye {
         return ((d > 0) && (d < maxDistance) && (angle < maxAngle));
     }
 
-    // Método para verficar se um ponto está na visão de longa distância
+    /**
+     * Checks whether a point is within far vision range.
+     *
+     * @param t the point to test
+     * @return true if the point is in far sight
+     */
     private boolean farSight(PVector t) {
         return inSight(t, me.dna.visionDistance, me.dna.visionAngle);
     }
 
-    // Método para verficar se um ponto está na visão de curta distância
+    /**
+     * Checks whether a point is within near (safe) vision range.
+     *
+     * @param t the point to test
+     * @return true if the point is in near sight
+     */
     private boolean nearSight(PVector t) {
         return inSight(t, me.dna.visionSafeDistance, (float)Math.PI);
     }
 
+    /**
+     * Returns the closest body currently in sight and sets it as the target.
+     *
+     * @return the closest visible body, or null if none
+     */
     public Body getClosestBoid() {
         Body closestBoid = null;
         float closestDistance = 1000;
@@ -92,17 +151,22 @@ public class Eye {
         return closestBoid;
     }
 
+    /**
+     * Selects the nearest tracked body and sets it as the current target.
+     *
+     * @return the nearest body, or null if there are no tracked bodies
+     */
     public Body nextTarget(){
         if (allTrackingBodies.size() == 0){
             return null;
         }
-        //começamos por ver a distância entre primeiro o primeiro body e o hunter (no caso do hunter)
+        // Start with the first body as the reference candidate.
         Body body = allTrackingBodies.get(0);
-        //vemos a distancia de referencia
+        // Reference distance to compare against.
         float dist = PVector.sub(me.getPos(), body.getPos()).mag();
         for (Body aux : allTrackingBodies){
             float newdist =  PVector.sub(me.getPos(),aux.getPos()).mag();
-            //se a distacia for menor que a anterior atualizamos a menor distancia e atualizamos o body certo
+            // If a closer body is found, update the reference and candidate.
             if (newdist < dist){
                 dist =  newdist;
                 body = aux;
@@ -112,7 +176,11 @@ public class Eye {
         return body;
     }
 
-    // Método para obter a lista de "Boids" dentro do campo de visão
+    /**
+     * Returns the bodies currently within the boid's field of vision.
+     *
+     * @return the list of visible bodies
+     */
     public List<Body> getBoidsInSight() {
         List<Body> boidsInSight = new ArrayList<>();
         for (Body b : allTrackingBodies) {
@@ -123,7 +191,9 @@ public class Eye {
         return boidsInSight;
     }
 
-    // Método "display"
+    /**
+     * Draws the boid's field of vision, direction, and safe distance.
+     */
     public void display(PApplet p, SubPlot plt) {
         p.pushStyle();
         p.pushMatrix();

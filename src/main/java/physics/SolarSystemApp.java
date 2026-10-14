@@ -8,37 +8,42 @@ import tools.SubPlot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Newtonian simulation of the Sun and the eight planets: every planet orbits
+ * under the gravitational attraction of the Sun. The zoom level can be changed
+ * with the 1, 2 and 3 keys.
+ */
 public class SolarSystemApp implements IProcessingApp {
 
     private float lastTime;
     private float dt;
 
-    // Distances from planet to Sun {Mercúrio, Vénus, Terra, Marte, Júpiter, Saturno, Urano, Neptuno}
+    // Distances from each planet to the Sun (m): Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.
     private float[] distancesToSun = {5.791e10f, 1.082e11f, 1.496e11f, 2.22794e11f, 7.7833e11f, 1.4294e12f, 2.87099e12f,
                                         4.5043e12f};
 
-    // Planet's Orbit Speed {Mercúrio, Vénus, Terra, Marte, Júpiter, Saturno, Urano, Neptuno}
+    // Orbital speed of each planet (m/s): Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.
     private float[] planetSpeed = {4.787e4f, 3.502e4f, 3e4f, 2.413e4f, 1.307e4f, 9.67e3f, 6.81e3f, 5.45e3f};
 
-    // Planet's Mass {Mercúrio, Vénus, Terra, Marte, Júpiter, Saturno, Urano, Neptuno}
+    // Mass of each planet (kg): Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.
     private float[] planetMass = {3.303e23f, 4.869e24f, 5.97e24f, 6.421e24f, 1.9e27f, 5.688e26f, 8.686e25f, 1.024e26f};
 
-    // Planet's radiusSize {Mercúrio, Vénus, Terra, Marte, Júpiter, Saturno, Urano, Neptuno}
+    // Radius of each planet (m): Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.
     private float[] planetSize = {2.4397e9f, 6.0518e9f, 6.37814e9f, 3.3972e9f, 6.9911e10f, 5.8232e10f, 2.5362e10f, 2.4622e10f};
 
-    // Tamanho Terra
+    // Earth's radius (m).
     private float earthRadius = 6.37814e6f;
 
-    // Dados para o Sol
+    // Sun data.
     private float sunMass = 1.989e30f;
 
     private float radiusSunSize = 8.5634e9f;
 
     private float distEarthSun = 1.496e11f;
 
-    // Viewport e Window
-    // Para o tamanho da window, usámos a maior distância de um planeta ao sol e multiplicámos por 1.2
-    // Neste caso o valor utilizado, é a distânica de Neptuno ao Sol
+    // Viewport and window.
+    // The window size uses the largest planet-to-Sun distance scaled by 1.2;
+    // here that is Neptune's distance to the Sun.
     private float smallWindow = 1.496e11f;
     private float mediumWindow = 7.7833e11f;
     private float bigWindow = 4.5043e12f;
@@ -49,10 +54,10 @@ public class SolarSystemApp implements IProcessingApp {
     private PSControl psc;
     private List<ParticleSystem> pss;
 
-    // Cada segundo corresponde a um mês na simulação
+    // One real second corresponds to one month in the simulation.
     private float speedUp = 60 * 60 * 24 * 30;
 
-    // Valores para ParticleSystem
+    // ParticleSystem parameters.
     private float[] velParams = {PApplet.radians(90), PApplet.radians(360), 1, 3};
     private float[] lifetimeParams = {1e5f, 1e6f};
     private float[] radiusParams = {1e8f, 1e9f};
@@ -65,7 +70,7 @@ public class SolarSystemApp implements IProcessingApp {
 
         lastTime = parent.millis();
 
-        // Setup dos Corpos Celestiais
+        // Create the celestial bodies.
         sun = new Body(new PVector(), new PVector(), sunMass, radiusSunSize, parent.color(255, 128, 0));
         mercury = new Body(new PVector(0, distancesToSun[0]), new PVector(planetSpeed[0], 0),
                 planetMass[0], planetSize[0], parent.color(119, 115, 114));
@@ -84,7 +89,7 @@ public class SolarSystemApp implements IProcessingApp {
         neptune = new Body(new PVector(0, distancesToSun[7]), new PVector(planetSpeed[7], 0),
                 planetMass[7], planetSize[7], parent.color(64, 101, 251));
 
-        // Sistema de partículas
+        // Particle systems (currently unused).
         pss = new ArrayList<ParticleSystem>();
     }
 
@@ -92,14 +97,14 @@ public class SolarSystemApp implements IProcessingApp {
     public void draw(PApplet parent, float dt) {
 
         float currentTime = parent.millis();
-        this.dt = (currentTime - lastTime) / 1000.0f; // Converte para segundos
+        this.dt = (currentTime - lastTime) / 1000.0f; // Convert to seconds
         lastTime = currentTime;
 
         float[] pp = plt.getBoundingBox();
         parent.fill(14, 12, 17);
         parent.rect(pp[0], pp[1], pp[2], pp[3]);
 
-        // Display Sol
+        // Draw the Sun.
         sun.display(parent, plt);
 
         /*
@@ -107,67 +112,67 @@ public class SolarSystemApp implements IProcessingApp {
         ParticleSystem ps = new ParticleSystem(new PVector(), new PVector() , 1f,0.2f, psc);
         pss.add(ps);
 
-        // Aplica uma força constante a todos os sistemas de partículas
+        // Apply a constant force to every particle system.
         for (ParticleSystem parSys : pss) {
             ps.applyForce(new PVector(0, 0));
         }
-        // Move e faz "display" a todos os sistemas de partículas
+        // Move and draw every particle system.
         for (ParticleSystem parSys : pss) {
             ps.move(dt);
             ps.display(parent, plt);
         }
          */
 
-        // Display Mercúrio
+        // Mercury.
         PVector fMercury = sun.attraction(mercury);
         mercury.applyForce(fMercury);
         mercury.move(dt * speedUp);
         mercury.display(parent, plt);
 
-        // Display Vénus
+        // Venus.
         PVector fVenus = sun.attraction(venus);
         venus.applyForce(fVenus);
         venus.move(dt * speedUp);
         venus.display(parent, plt);
 
-        // Display Terra
+        // Earth.
         PVector fEarth = sun.attraction(earth);
         earth.applyForce(fEarth);
         earth.move(dt * speedUp);
         earth.display(parent, plt);
 
-        // Display Marte
+        // Mars.
         PVector fMars = sun.attraction(mars);
         mars.applyForce(fMars);
         mars.move(dt * speedUp);
         mars.display(parent, plt);
 
-        // Display Jupiter
+        // Jupiter.
         PVector fJupiter = sun.attraction(jupiter);
         jupiter.applyForce(fJupiter);
         jupiter.move(dt * speedUp);
         jupiter.display(parent, plt);
 
-        // Display Saturno
+        // Saturn.
         PVector fSaturn = sun.attraction(saturn);
         saturn.applyForce(fSaturn);
         saturn.move(dt * speedUp);
         saturn.display(parent, plt);
 
-        // Display Urano
+        // Uranus.
         PVector fUranus = sun.attraction(uranus);
         uranus.applyForce(fUranus);
         uranus.move(dt * speedUp);
         uranus.display(parent, plt);
 
-        // Display Neptune
+        // Neptune.
         PVector fNeptune = sun.attraction(neptune);
         neptune.applyForce(fNeptune);
         neptune.move(dt * speedUp);
         neptune.display(parent, plt);
     }
 
-    // Método para fazer algo quando uma determinada tecla é pressionada
+    // Called when a key is pressed: 1, 2 and 3 change the zoom level.
     @Override
     public void keyPressed(PApplet parent) {
         if (parent.key == '1') {
@@ -184,11 +189,9 @@ public class SolarSystemApp implements IProcessingApp {
         }
     }
 
-    // Método para fazer algo quando o rato é pressionado
     @Override
     public void mousePressed(PApplet parent) {}
 
-    // Método para fazer algo quando o rato é arrastado
     @Override
     public void mouseDragged(PApplet parent) {}
 }

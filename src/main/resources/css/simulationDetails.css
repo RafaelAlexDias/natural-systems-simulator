@@ -1,0 +1,93 @@
+.details-root {
+    -fx-background-color: #11191D;
+    -fx-font-family: "Segoe UI";
+}
+
+.details-scroll,
+.details-scroll > .viewport {
+    -fx-background-color: #11191D;
+    -fx-border-color: transparent;
+}
+
+.details-content {
+    -fx-background-color: #11191D;
+}
+
+.breadcrumb-link,
+.breadcrumb-separator,
+.breadcrumb-current {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-size: 20px;
+}
+
+.breadcrumb-link {
+    -fx-cursor: hand;
+}
+
+.breadcrumb-link:hover {
+    -fx-text-fill: #4D91CC;
+}
+
+.details-header {
+    -fx-min-height: 150px;
+}
+
+.details-image {
+    -fx-background-color: #1C252B;
+    -fx-border-color: #414D57;
+    -fx-border-width: 2px;
+    -fx-border-radius: 9px;
+    -fx-background-radius: 9px;
+}
+
+.details-title {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-size: 27px;
+}
+
+.run-button {
+    -fx-background-color: #4D91CC;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 18px;
+    -fx-background-radius: 9px;
+    -fx-padding: 12px 17px;
+    -fx-cursor: hand;
+}
+
+.run-button:hover {
+    -fx-background-color: #68A7DF;
+}
+
+.run-button:pressed {
+    -fx-background-color: #3679B6;
+}
+
+.details-panel {
+    -fx-background-color: #1C252B;
+    -fx-border-color: #414D57;
+    -fx-border-width: 2.5px;
+    -fx-border-radius: 13px;
+    -fx-background-radius: 13px;
+    -fx-padding: 16px 18px;
+    -fx-min-height: 290px;
+}
+
+.details-section-title {
+    -fx-text-fill: #F4F4F4;
+    -fx-font-size: 25px;
+}
+
+.details-description,
+.control-item {
+    -fx-text-fill: #E0E3E5;
+    -fx-font-size: 14px;
+}
+
+.controls-container {
+    -fx-padding: 0 0 0 5px;
+}
+
+.control-item {
+    -fx-padding: 0 0 0 3px;
+}

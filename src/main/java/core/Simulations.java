@@ -41,6 +41,10 @@ public final class Simulations {
                     "Chaos Game",
                     "Generate geometric fractals by repeatedly moving towards "
                             + "randomly selected vertices of a triangle.",
+                    List.of(
+                            "Runs automatically once launched.",
+                            "Close the Processing window to stop."
+                    ),
                     "\u25B3",
                     "/images/simulations/chaos-game.png",
                     LocalDate.of(2026, 10, 9),
@@ -52,6 +56,11 @@ public final class Simulations {
                     "Chaos Game",
                     "Explore fractal patterns generated using the vertices "
                             + "of a pentagon.",
+                    List.of(
+                            "Runs automatically once launched.",
+                            "The same vertex is never picked twice in a row.",
+                            "Close the Processing window to stop."
+                    ),
                     "\u2B20",
                     null,
                     LocalDate.of(2026, 10, 8),
@@ -63,6 +72,11 @@ public final class Simulations {
                     "Chaos Game",
                     "Experiment with chaos-game rules using polygons with "
                             + "different numbers of sides (press 5-9).",
+                    List.of(
+                            "Runs automatically once launched.",
+                            "Press 5-9 to change the number of polygon sides.",
+                            "Close the Processing window to stop."
+                    ),
                     "\u2B21",
                     null,
                     LocalDate.of(2026, 10, 7),
@@ -74,6 +88,13 @@ public final class Simulations {
                     "Fractals",
                     "Diffusion-Limited Aggregation forms branching structures "
                             + "as randomly moving particles stick together.",
+                    List.of(
+                            "Runs automatically once launched.",
+                            "Press Space to pause or resume.",
+                            "Press W to speed up and S to slow down.",
+                            "Click to restart the cluster.",
+                            "Close the Processing window to stop."
+                    ),
                     "DLA",
                     "/images/simulations/dla.png",
                     LocalDate.of(2026, 10, 10),
@@ -84,6 +105,12 @@ public final class Simulations {
                     "BoidAceleradorTravao",
                     "AA",
                     "Boids simulation",
+                    List.of(
+                            "Press + to increase the boid speed.",
+                            "Press - to decrease the boid speed.",
+                            "Click to move the target.",
+                            "Close the Processing window to stop."
+                    ),
                     "Boid",
                     null,
                     LocalDate.of(2026, 10, 13),
@@ -94,6 +121,11 @@ public final class Simulations {
                     "Boid - Wander",
                     "AA",
                     "A single autonomous agent wandering inside a bounded world.",
+                    List.of(
+                            "Runs the wander behaviour.",
+                            "Click to move the target.",
+                            "Close the Processing window to stop."
+                    ),
                     "BOID",
                     null,
                     LocalDate.of(2026, 10, 13),
@@ -105,6 +137,11 @@ public final class Simulations {
                     "AA",
                     "Combines the wander and seek steering behaviours on a "
                             + "moving target.",
+                    List.of(
+                            "Click to move the target.",
+                            "The target jumps elsewhere when the boid reaches it.",
+                            "Close the Processing window to stop."
+                    ),
                     "BOID",
                     null,
                     LocalDate.of(2026, 10, 13),
@@ -116,9 +153,14 @@ public final class Simulations {
                     "AA",
                     "A flock of boids evading a predator that pursues the "
                             + "nearest neighbour.",
+                    List.of(
+                            "Runs automatically once launched.",
+                            "The predator pursues the nearest boid.",
+                            "Close the Processing window to stop."
+                    ),
                     "FLOCK",
                     null,
-                    LocalDate.of(2026, 10, 12),
+                    LocalDate.of(2026, 10, 13),
                     FlockPredatorApp::new
             ),
             new Simulation(
@@ -127,9 +169,13 @@ public final class Simulations {
                     "AA",
                     "A flock where one boid is steered manually with the WASD "
                             + "keys.",
+                    List.of(
+                            "Press W, A, S and D to steer the highlighted boid.",
+                            "Close the Processing window to stop."
+                    ),
                     "FLOCK",
                     null,
-                    LocalDate.of(2026, 10, 12),
+                    LocalDate.of(2026, 10, 13),
                     FlockWASDApp::new
             ),
             new Simulation(
@@ -138,9 +184,14 @@ public final class Simulations {
                     "AA",
                     "Three panels exercising wander, pursuit and the seek/flee "
                             + "switch (press T).",
+                    List.of(
+                            "Press T to switch the bottom-right panel between Seek and Flee.",
+                            "Click inside the bottom-right panel to move the target.",
+                            "Close the Processing window to stop."
+                    ),
                     "REY",
                     null,
-                    LocalDate.of(2026, 10, 12),
+                    LocalDate.of(2026, 10, 13),
                     ReynoldsTestApp::new
             ),
             new Simulation(
@@ -149,9 +200,14 @@ public final class Simulations {
                     "AA",
                     "Visualises the field of view of a boid and highlights the "
                             + "neighbours it can see.",
+                    List.of(
+                            "Runs automatically once launched.",
+                            "Boids inside the field of view are drawn in red.",
+                            "Close the Processing window to stop."
+                    ),
                     "FLOCK",
                     null,
-                    LocalDate.of(2026, 10, 12),
+                    LocalDate.of(2026, 10, 13),
                     DebuggingApp::new
             ),
             new Simulation(
@@ -160,9 +216,14 @@ public final class Simulations {
                     "Physics",
                     "A body falling through air and water, showing the effect of "
                             + "fluid drag.",
+                    List.of(
+                            "Runs automatically once launched.",
+                            "The fall time is printed to the console when the body lands.",
+                            "Close the Processing window to stop."
+                    ),
                     "PHYS",
                     null,
-                    LocalDate.of(2026, 10, 11),
+                    LocalDate.of(2026, 10, 13),
                     FallingBodyApp::new
             ),
             new Simulation(
@@ -171,9 +232,14 @@ public final class Simulations {
                     "Physics",
                     "Click to spawn particle systems and change their launch "
                             + "direction with the mouse.",
+                    List.of(
+                            "Click to spawn a particle system.",
+                            "Move the mouse horizontally to change the launch angle.",
+                            "Close the Processing window to stop."
+                    ),
                     "PHYS",
                     null,
-                    LocalDate.of(2026, 10, 11),
+                    LocalDate.of(2026, 10, 13),
                     ParticleSystemApp::new
             ),
             new Simulation(
@@ -182,9 +248,14 @@ public final class Simulations {
                     "Physics",
                     "Newtonian simulation of the Sun and the eight planets "
                             + "(press 1-3 to zoom).",
+                    List.of(
+                            "Runs automatically once launched.",
+                            "Press 1, 2 or 3 to change the zoom level.",
+                            "Close the Processing window to stop."
+                    ),
                     "PHYS",
                     null,
-                    LocalDate.of(2026, 10, 11),
+                    LocalDate.of(2026, 10, 13),
                     SolarSystemApp::new
             ),
             new Simulation(
@@ -193,9 +264,14 @@ public final class Simulations {
                     "Physics",
                     "A rigid body driven by position, velocity or force control "
                             + "(press P/V/F).",
+                    List.of(
+                            "Press P for position, V for velocity and F for force control.",
+                            "Click to set the control vector.",
+                            "Close the Processing window to stop."
+                    ),
                     "PHYS",
                     null,
-                    LocalDate.of(2026, 10, 11),
+                    LocalDate.of(2026, 10, 13),
                     ControlGUIApp::new
             )
     );

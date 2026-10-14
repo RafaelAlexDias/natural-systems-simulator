@@ -4,6 +4,10 @@ import processing.core.PApplet;
 import processing.core.PVector;
 import setup.IProcessingApp;
 
+/**
+ * Interactive demo of a {@link RigidBody} driven by a {@link MotionControl}
+ * whose mode (position, velocity or force) is switched with the P, V and F keys.
+ */
 public class ControlGUIApp implements IProcessingApp {
 
     private RigidBody rb;
@@ -13,28 +17,27 @@ public class ControlGUIApp implements IProcessingApp {
 
     @Override
     public void setup(PApplet parent) {
-        // Inicialização de um "RigidBody" e um "MotionControl"
+        // Create the rigid body and its controller.
         rb = new RigidBody(mass);
         mc = new MotionControl(ct, rb);
     }
 
     @Override
     public void draw(PApplet parent, float dt) {
-        // Limpeza da window
+        // Clear the window.
         parent.background(255);
 
         parent.translate(parent.width/2, parent.height/2);
-        // Movimento do "RigidBody"
+        // Advance the rigid body.
         rb.move(dt, ct);
-        // Display do "RigidBody" e do "MotionControl"
+        // Draw the rigid body and the controller.
         rb.display(parent);
         mc.display(parent);
     }
 
-    // Método para fazer algo quando uma determinada tecla é pressionada
     @Override
     public void keyPressed(PApplet parent) {
-        // Altera o método de controlo do "RigidBody" de acordo com uma certa tecla
+        // Switch the control mode according to the pressed key.
         if (parent.key == 'p') {
             ct = RigidBody.ControlType.POSITION;
         }
@@ -48,16 +51,14 @@ public class ControlGUIApp implements IProcessingApp {
         mc = new MotionControl(ct, rb);
     }
 
-    // Método para fazer algo quando o rato é pressionado
     @Override
     public void mousePressed(PApplet parent) {
-        // Posicionamento do vetor
+        // Set the control vector from the click position.
         float x = parent.mouseX - parent.width/2;
         float y = parent.mouseY - parent.height/2;
         mc.setVector(new PVector(x, y));
     }
 
-    // Método para fazer algo quando o rato é arrastado
     @Override
     public void mouseDragged(PApplet parent) {}
 }

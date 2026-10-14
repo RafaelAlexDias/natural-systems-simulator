@@ -3,13 +3,24 @@ package aa;
 import physics.Body;
 import processing.core.PVector;
 
+/**
+ * Steers a boid away from nearby flockmates to avoid crowding.
+ * This implements Reynolds' separation rule.
+ */
 public class Separate extends Behavior {
-    // Construtor do comportamento "Separate"
+    /**
+     * Creates a new separation behavior with the specified weight.
+     *
+     * @param weight the steering weight applied to this behavior
+     */
     public Separate(float weight) {
         super(weight);
     }
 
-    // Método "getDesiredVelocity" dedicado para este comportamento
+    /**
+     * Returns the desired velocity that pushes the boid away from very close
+     * neighbors, weighted by inverse square distance.
+     */
     @Override
     public PVector getDesiredVelocity(Boid me) {
         PVector vd = new PVector();

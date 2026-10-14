@@ -3,6 +3,7 @@ package core;
 import setup.IProcessingApp;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -17,6 +18,7 @@ import java.util.function.Supplier;
  * @param name        human readable name shown on the cards
  * @param category    grouping used by the filters
  * @param description short explanation shown on the cards
+ * @param controls    user interactions shown on the details page
  * @param icon        short glyph used when no preview image is available
  * @param imagePath   classpath resource of the preview image, may be {@code null}
  * @param dateAdded   date used by the "recently added" ordering
@@ -28,6 +30,7 @@ public record Simulation(
         String name,
         String category,
         String description,
+        List<String> controls,
         String icon,
         String imagePath,
         LocalDate dateAdded,
@@ -41,6 +44,7 @@ public record Simulation(
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Simulation name must not be blank");
         }
+        controls = controls == null ? List.of() : List.copyOf(controls);
     }
 
     /**

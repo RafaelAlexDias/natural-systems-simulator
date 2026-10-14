@@ -3,6 +3,10 @@ package physics;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+/**
+ * A simple point body whose position, velocity or force can be driven by a
+ * {@link MotionControl}.
+ */
 public class RigidBody {
     public enum ControlType {
         POSITION,
@@ -14,7 +18,7 @@ public class RigidBody {
     private PVector acc;
     private float mass;
 
-    // Construtor de um "RigidBody"
+    // Creates a rigid body of the given mass at the origin.
     public RigidBody(float mass) {
         pos = new PVector();
         vel = new PVector();
@@ -22,22 +26,22 @@ public class RigidBody {
         this.mass = mass;
     }
 
-    // Método para definir a posição de um "RigidBody"
+    // Sets the position directly.
     public void setPos(PVector pos) {
         this.pos = pos;
     }
 
-    // Método para definir a velocidade de um "RigidBody"
+    // Sets the velocity directly.
     public void setVel(PVector vel) {
         this.vel = vel;
     }
 
-    // Método para aplicar uma força de um "RigidBody"
+    // Sets the acceleration from a force (acc = force / mass).
     public void applyForce(PVector force) {
         this.acc = PVector.div(force, mass);
     }
 
-    // Método "move" de um "RigidBody"
+    // Integrates the body's state according to the control type.
     public void move(float dt, ControlType ct) {
         switch (ct) {
             case POSITION:
@@ -52,7 +56,7 @@ public class RigidBody {
         }
     }
 
-    // Método "display" de um "RigidBody"
+    // Draws the body as a circle.
     public void display(PApplet p) {
         p.circle(pos.x, pos.y, 30);
     }

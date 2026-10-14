@@ -3,19 +3,23 @@ package physics;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+/**
+ * Turns a pointer vector into position, velocity or force commands applied to a
+ * {@link RigidBody}.
+ */
 public class MotionControl {
     private RigidBody rb;
     private RigidBody.ControlType ct;
     private PVector vector;
 
-    // Construtor do "MotionControl"
+    // Creates a controller for the body using the given control type.
     public MotionControl(RigidBody.ControlType ct, RigidBody rb) {
         this.ct = ct;
         this.rb = rb;
         vector = new PVector();
     }
 
-    // Método que permite aplicar a força de um certo vetor
+    // Applies the vector to the body according to the current control type.
     public void setVector(PVector vector) {
         this.vector = vector;
         switch(ct) {
@@ -31,7 +35,7 @@ public class MotionControl {
         }
     }
 
-    // Método "display" do "MotionControl"
+    // Draws the axes and the current control vector.
     public void display(PApplet p) {
         p.strokeWeight(1);
         p.line(-p.width/2, 0, p.width/2, 0);

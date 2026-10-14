@@ -259,19 +259,10 @@ public class SimulationController {
     }
 
     private void openSimulation(Simulation simulation) {
-        if (!simulation.isRunnable()) {
-            LOG.log(
-                    Logger.Level.DEBUG,
-                    "Simulation is not runnable yet: {0}",
-                    simulation.id()
-            );
-            return;
-        }
-
         if (onOpenSimulation == null) {
             LOG.log(
                     Logger.Level.ERROR,
-                    "No simulation launcher configured for: {0}",
+                    "No details-page navigation configured for: {0}",
                     simulation.id()
             );
             return;
@@ -279,6 +270,7 @@ public class SimulationController {
 
         onOpenSimulation.accept(simulation);
     }
+
 
     private void updateActiveChip(Button activeButton) {
         for (Button button : List.of(

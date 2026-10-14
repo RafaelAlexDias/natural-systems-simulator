@@ -7,12 +7,16 @@ import tools.SubPlot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A moving emitter that spawns {@link Particle}s over time according to its
+ * {@link PSControl} parameters.
+ */
 public class ParticleSystem extends Body{
 
     private List<Particle> particles;
     private PSControl psc;
 
-    // Construtor de um "ParticleSystem"
+    // Creates a particle system at the given position with the given control.
     protected ParticleSystem(PVector pos, PVector vel, float mass,
                              float radius, PSControl psc) {
         super(pos, vel, mass, radius, 0);
@@ -20,12 +24,12 @@ public class ParticleSystem extends Body{
         this.particles = new ArrayList<Particle>();
     }
 
-    // Método para obter o "PSControl" de um "ParticleSystem"
+    // Returns the control parameters of this system.
     public PSControl getPSControl() {
         return psc;
     }
 
-    // Método "move" de um "ParticleSystem"
+    // Moves the emitter, spawns new particles and reaps the dead ones.
     @Override
     public void move(float dt) {
         super.move(dt);
@@ -39,7 +43,7 @@ public class ParticleSystem extends Body{
         }
     }
 
-    // Método para adicionar várias "Particle"
+    // Spawns as many particles as the flow rate requires for this time step.
     public void addParticles(float dt) {
         float particlesPerFrame = psc.getFlow() * dt;
         int n = (int) particlesPerFrame;
@@ -52,7 +56,7 @@ public class ParticleSystem extends Body{
         }
     }
 
-    // Método para adicionar uma "Particle"
+    // Spawns a single particle with random velocity, radius and lifetime.
     private void addOneParticle() {
         Particle particle = new Particle(
                 new PVector(),
@@ -64,7 +68,7 @@ public class ParticleSystem extends Body{
         particles.add(particle);
     }
 
-    // Método "display" de um "ParticleSystem"
+    // Draws all live particles.
     @Override
     public void display(PApplet p, SubPlot plt) {
         for (Particle particle : particles) {

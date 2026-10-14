@@ -10,6 +10,11 @@ import tools.SubPlot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An autonomous agent ("bird-oid object") that moves using a weighted
+ * combination of steering behaviors. Boids also carry DNA parameters and a
+ * vision system used by those behaviors.
+ */
 public class Boid extends Body {
 
     private SubPlot plt;
@@ -23,7 +28,16 @@ public class Boid extends Body {
     private float sumWeights;
     private boolean dead = false;
 
-    // Construtor de um "Boid"
+    /**
+     * Creates a new boid with a solid color shape.
+     *
+     * @param pos the initial position
+     * @param mass the boid's mass
+     * @param radius the boid's radius
+     * @param color the fill color
+     * @param p the Processing applet
+     * @param plt the subplot for coordinate mapping
+     */
     protected Boid(PVector pos, float mass, float radius,
                    int color, PApplet p, SubPlot plt) {
         super(pos, new PVector(), mass, radius, color);
@@ -34,6 +48,16 @@ public class Boid extends Body {
         setShape(p, plt);
     }
 
+    /**
+     * Creates a new boid with a custom SVG shape.
+     *
+     * @param pos the initial position
+     * @param mass the boid's mass
+     * @param radius the boid's radius
+     * @param shapeString the path to the shape file
+     * @param p the Processing applet
+     * @param plt the subplot for coordinate mapping
+     */
     protected Boid(PVector pos, float mass, float radius,
                    String shapeString, PApplet p, SubPlot plt) {
         super(pos, new PVector(), mass, radius, shapeString);
@@ -43,9 +67,12 @@ public class Boid extends Body {
         this.shape = p.loadShape(shapeString);
         this.plt = plt;
         window = plt.getWindow();
-        // setShape(p, plt);
     }
 
+    /**
+     * Randomly mutates behavior weights for behaviors that support mutation.
+     * Currently applied to AvoidObstacle behaviors.
+     */
     public void mutateBehaviors() {
         for(Behavior behavior : behaviors) {
             if(behavior instanceof AvoidObstacle) {
@@ -64,28 +91,51 @@ public class Boid extends Body {
         return dna;
     }
 
-    // Método setter para um Eye
+    /**
+     * Sets the boid's vision system.
+     *
+     * @param eye the eye instance to attach
+     */
     public void setEye(Eye eye) {
         this.eye = eye;
     }
 
-    // Método getter para um Eye
+    /**
+     * Returns the boid's vision system.
+     *
+     * @return the eye instance
+     */
     public Eye getEye() {
         return eye;
     }
 
-    // Método getter para um radius
+    /**
+     * Returns the boid's radius.
+     *
+     * @return the radius
+     */
     public float getRadius() {
         return radius;
     }
 
-    // Método para configurar uma determinada forma de um "Boid" com uma cor
+    /**
+     * Sets the boid's shape color and regenerates the shape.
+     *
+     * @param p the Processing applet
+     * @param plt the subplot for coordinate mapping
+     * @param color the new fill color
+     */
     public void setShape(PApplet p, SubPlot plt, int color) {
         this.color = color;
         setShape(p, plt);
     }
 
-    // Método para configurar a forma de um "Boid"
+    /**
+     * Creates and sets the boid's triangular shape based on its radius and subplot scale.
+     *
+     * @param p the Processing applet
+     * @param plt the subplot for coordinate mapping
+     */
     public void setShape(PApplet p, SubPlot plt) {
         float[] rr = plt.getVectorCoord(radius, radius);
         shape = p.createShape();
@@ -99,7 +149,9 @@ public class Boid extends Body {
         shape.endShape(PConstants.CLOSE);
     }
 
-    // Método para atualizar a soma do peso dos comportamentos
+    /**
+     * Recalculates the sum of all behavior weights.
+     */
     private void updateSumWeights() {
         sumWeights = 0;
         for (Behavior behavior : behaviors) {
@@ -107,13 +159,21 @@ public class Boid extends Body {
         }
     }
 
-    // Método para adicionar um comportamento à lista
+    /**
+     * Adds a steering behavior to this boid.
+     *
+     * @param behavior the behavior to add
+     */
     public void addBehavior(Behavior behavior) {
         behaviors.add(behavior);
         updateSumWeights();
     }
 
-    // Método para remover um comportamento à lista
+    /**
+     * Removes a steering behavior from this boid if present.
+     *
+     * @param behavior the behavior to remove
+     */
     public void removeBehavior(Behavior behavior) {
         if (behaviors.contains(behavior)) {
             behaviors.remove(behavior);
@@ -121,7 +181,12 @@ public class Boid extends Body {
         updateSumWeights();
     }
 
-    // Método para aplicar um certo comportamento
+    /**
+     * Applies a single behavior by index and updates the boid's movement.
+     *
+     * @param i the index of the behavior to apply
+     * @param dt the time step
+     */
     public void applyBehavior(int i, float dt) {
         if (eye!= null) eye.look();
         Behavior behavior = behaviors.get(i);
@@ -129,7 +194,11 @@ public class Boid extends Body {
         move(dt, vd);
     }
 
-    // Método para aplicar todos os comportamentos da lista
+    /**
+     * Applies all behaviors with their respective weights and updates the boid's movement.
+     *
+     * @param dt the time step
+     */
     public void applyBehaviors(float dt) {
         if (eye!= null) eye.look();
 
@@ -142,17 +211,26 @@ public class Boid extends Body {
         move(dt, vd);
     }
 
-    // Método para determinar a distância de um "Boid" a um certo target
+    /**
+     * Calculates the distance from this boid to the given target.
+     *
+     * @param target the target body
+     * @return the distance between positions
+     */
     public float distanceToTarget(Body target) {
         return PVector.dist(this.pos, target.getPos());
     }
 
-    // Método para aumentar a velocidade de um "Boid"
+    /**
+     * Increases the boid's maximum speed by a fixed amount.
+     */
     public void increaseSpeed() {
         dna.maxSpeed += 1;
     }
 
-    // Método para diminuir a velocidade de um "Boid"
+    /**
+     * Decreases the boid's maximum speed by a fixed amount, clamped to zero.
+     */
     public void decreaseSpeed() {
         dna.maxSpeed -= 1;
         if (dna.maxSpeed < 0) {
@@ -160,7 +238,13 @@ public class Boid extends Body {
         }
     }
 
-    // Método "move" de um "Boid"
+    /**
+     * Moves the boid according to the given desired velocity and time step.
+     * Handles steering forces, wrapping around the simulation window.
+     *
+     * @param dt the time step
+     * @param vd the desired velocity
+     */
     private void move(float dt, PVector vd) {
         vd.normalize().mult(dna.maxSpeed);
         PVector fs = PVector.sub(vd, vel);
@@ -180,23 +264,33 @@ public class Boid extends Body {
         }
     }
 
-    // Método "display" de um "Boid"
+    /**
+     * Displays the boid on the canvas if it is alive.
+     */
     @Override
     public void display(PApplet p, SubPlot plt) {
         if (!dead) {
             p.pushMatrix();
             float[] pp = plt.getPixelCoord(pos.x, pos.y);
-            // p.translate(pp[0], pp[1]);
-            // p.rotate(-vel.heading());
             p.shape(shape, pp[0] - 10f, pp[1] - 10f, 20f, 20f);
             p.popMatrix();
         }
     }
 
+    /**
+     * Checks if the boid is dead.
+     *
+     * @return true if dead, false otherwise
+     */
     public boolean isDead() {
         return dead;
     }
 
+    /**
+     * Sets the boid's alive/dead state.
+     *
+     * @param b true to mark as dead, false otherwise
+     */
     public void setDead(boolean b) {
         dead = b;
     }

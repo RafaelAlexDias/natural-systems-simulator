@@ -3,13 +3,22 @@ package aa;
 import physics.Body;
 import processing.core.PVector;
 
+/**
+ * Steers a boid directly toward its current target.
+ */
 public class Seek extends Behavior{
-    // Construtor do comportamento "Seek"
+    /**
+     * Creates a new seek behavior with the specified weight.
+     *
+     * @param weight the steering weight applied to this behavior
+     */
     public Seek(float weight) {
         super(weight);
     }
 
-    // Método "getDesiredVelocity" dedicado para este comportamento
+    /**
+     * Returns the desired velocity that moves the boid toward the target.
+     */
     @Override
     public PVector getDesiredVelocity(Boid me) {
         Body bodyTarget = me.eye.target;

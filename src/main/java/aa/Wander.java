@@ -2,13 +2,24 @@ package aa;
 
 import processing.core.PVector;
 
+/**
+ * Produces a smooth, random wandering path by steering toward a point on a
+ * circle projected ahead of the boid.
+ */
 public class Wander extends Behavior {
-    // Construtor do comportamento "Wander"
+    /**
+     * Creates a new wander behavior with the specified weight.
+     *
+     * @param weight the steering weight applied to this behavior
+     */
     public Wander(float weight) {
         super(weight);
     }
 
-    // Método "getDesiredVelocity" dedicado para este comportamento
+    /**
+     * Returns the desired velocity toward a randomly displaced point on the
+     * wander circle, advancing the wander angle each step.
+     */
     @Override
     public PVector getDesiredVelocity(Boid me) {
         PVector center = me.getPos().copy();

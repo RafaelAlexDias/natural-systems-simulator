@@ -4,31 +4,35 @@ import processing.core.PApplet;
 import processing.core.PVector;
 import tools.SubPlot;
 
+/**
+ * A short-lived body that fades out as it ages and is removed once its lifespan
+ * has elapsed.
+ */
 public class Particle extends Body{
 
     private float lifespan;
     private float timer;
 
-    // Construtor de uma "Particle"
+    // Creates a particle with the given lifespan.
     protected Particle(PVector pos, PVector vel, float radius, int color, float lifespan) {
         super(pos, vel, 0f, radius, color);
         this.lifespan = lifespan;
         timer = 0;
     }
 
-    // Método para mover uma "Particle"
+    // Moves the particle and advances its age timer.
     @Override
     public void move(float dt) {
         super.move(dt);
         timer += dt;
     }
 
-    // Método para verificar se uma "Particle" está morta
+    // Returns whether the particle has outlived its lifespan.
     public boolean isDead() {
         return timer > lifespan;
     }
 
-    // Método "display" de uma "Particle"
+    // Draws the particle, fading its alpha as it ages.
     @Override
     public void display(PApplet p, SubPlot plt) {
         p.pushStyle();

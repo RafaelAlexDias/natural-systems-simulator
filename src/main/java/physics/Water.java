@@ -3,23 +3,26 @@ package physics;
 import processing.core.PApplet;
 import tools.SubPlot;
 
+/**
+ * A rectangular body of water that applies drag to submerged movers.
+ */
 public class Water extends Fluid {
     private float waterHeight;
     private int color;
 
-    // Construtor do "Fluid" "Water"
+    // Creates water up to the given height, drawn in the given colour.
     protected Water(float waterHeight, int color) {
         super(1000.0f);
         this.waterHeight = waterHeight;
         this.color = color;
     }
 
-    // Método que verifica se um "Mover" está dentro da área da água
+    // Returns whether the mover is below the water surface.
     public boolean isInside(Mover m) {
         return (m.getPos().y <= waterHeight);
     }
 
-    // Método "display" para a água
+    // Draws the water rectangle.
     public void display(PApplet p, SubPlot plt) {
         p.pushStyle();
         p.noStroke();

@@ -2,6 +2,10 @@ package physics;
 
 import processing.core.PVector;
 
+/**
+ * Parameters controlling how a {@link ParticleSystem} emits particles: their
+ * velocity range, lifetime range, radius range, colour and flow rate.
+ */
 public class PSControl {
     private float averageAngle;
     private float dispersionAngle;
@@ -14,7 +18,7 @@ public class PSControl {
     private float flow;
     private int color;
 
-    // Construtor de um "PSControl"
+    // Creates a control block from velocity, lifetime and radius parameters.
     public PSControl(float[] velControl, float[] lifetime, float[] radius,
                      float flow, int color) {
         setVelParams(velControl);
@@ -24,7 +28,7 @@ public class PSControl {
         setColor(color);
     }
 
-    // Método para definir os parâmetros de velocidade
+    // Sets the velocity parameters {average angle, dispersion, min, max}.
     public void setVelParams (float[] velControl) {
         averageAngle = velControl[0];
         dispersionAngle = velControl[1];
@@ -32,56 +36,56 @@ public class PSControl {
         maxVelocity = velControl[3];
     }
 
-    // Método para definir o fluxo
+    // Sets the emission flow (particles per unit time).
     public void setFlow(float flow) {
         this.flow = flow;
     }
 
-    // Método para definir a cor
+    // Sets the particle colour.
     public void setColor(int color) {
         this.color = color;
     }
 
-    // Método para obter o fluxo
+    // Returns the emission flow.
     public float getFlow() {
         return flow;
     }
 
-    // Método para obter a cor
+    // Returns the particle colour.
     public int getColor() {
         return color;
     }
 
-    // Método para obter um raio aleatório
+    // Returns a random radius within the configured range.
     public float getRndRadius() {
         return getRnd(minRadius, maxRadius);
     }
 
-    // Método para obter um tempo de vida aleatório
+    // Returns a random lifetime within the configured range.
     public float getRndLifetime() {
         return getRnd(minLifetime, maxLifetime);
     }
 
-    // Método ppara definir os parâmetros do raio
+    // Sets the radius range {min, max}.
     public void setRadiusParams(float[] radius) {
         minRadius = radius[0];
         maxRadius = radius[1];
     }
 
-    // Método ppara definir os parâmetros do tempo de vida
+    // Sets the lifetime range {min, max}.
     public void setLifetimeParams(float[] lifetime) {
         minLifetime = lifetime[0];
         maxLifetime = lifetime[1];
     }
 
-    // Método para obter um vetor de velocidade aleatório dentro dos parâmetros definidos
+    // Returns a random velocity inside the configured angle and speed range.
     public PVector getRndVel() {
         float angle = getRnd(averageAngle - dispersionAngle/2, averageAngle + dispersionAngle/2);
         PVector v = PVector.fromAngle(angle);
         return v.mult(getRnd(minVelocity, maxVelocity));
     }
 
-    // Método estático para obter um número aleatório dentro dos limites
+    // Returns a random number in [min, max).
     public static float getRnd(float min, float max) {
         return min + (float) (Math.random() * (max - min));
     }

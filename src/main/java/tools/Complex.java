@@ -1,5 +1,12 @@
 package tools;
 
+/**
+ * Minimal mutable complex number.
+ *
+ * <p>Provides only the operations required by the simulations: addition,
+ * multiplication and the modulus. Arithmetic methods mutate this instance and
+ * return it, which allows chaining but makes them unsuitable for shared values.
+ */
 public class Complex {
     private double a, b;
 
@@ -18,6 +25,7 @@ public class Complex {
         this.b = 0;
     }
 
+    /** Multiplies this complex number by {@code x} in place. */
     public Complex mult(Complex x) {
         double real = this.a * x.a - this.b * x.b;
         double imag = this.a * x.b + this.b * x.a;
@@ -26,12 +34,14 @@ public class Complex {
         return this;
     }
 
+    /** Adds {@code x} to this complex number in place. */
     public Complex add(Complex x) {
         this.a += x.a;
         this.b += x.b;
         return this;
     }
 
+    /** @return the modulus (absolute value) of this complex number. */
     public double norm() {
         return Math.sqrt(a*a+b*b);
     }

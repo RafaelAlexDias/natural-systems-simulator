@@ -8,6 +8,10 @@ import tools.SubPlot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Interactive demo where clicking spawns a {@link ParticleSystem} and the mouse
+ * x-position sets the launch angle.
+ */
 public class ParticleSystemApp implements IProcessingApp {
 
     private List<ParticleSystem> pss;
@@ -21,42 +25,40 @@ public class ParticleSystemApp implements IProcessingApp {
 
     @Override
     public void setup(PApplet parent) {
-        // Inicialização de um "SubPlot" e uma lista de "ParticleSystem"
+        // Create the subplot and start with an empty list of systems.
         plt = new SubPlot(window, viewport, parent.width, parent.height);
         pss = new ArrayList<ParticleSystem>();
     }
 
     @Override
     public void draw(PApplet parent, float dt) {
-        // Limpeza da window
+        // Clear the window.
         parent.background(255);
-        // Aplica uma força constante a todos os sistemas de partículas
+        // Apply a constant (zero) force to every particle system.
         for (ParticleSystem ps : pss) {
             ps.applyForce(new PVector(0, 0));
         }
-        // Move e faz "display" a todos os sistemas de partículas
+        // Move and draw every particle system.
         for (ParticleSystem ps : pss) {
             ps.move(dt);
             ps.display(parent, plt);
         }
-        // Atualiza os parâmetros de velocidade com base na posição do mouse
+        // Update the launch angle from the mouse x-position.
         velParams[0] = PApplet.map(parent.mouseX, 0, parent.width,
                 PApplet.radians(0), PApplet.radians(360));
-        // Atualiza os parâmetros de velocidade para todos os sistemas de partículas
+        // Propagate the new velocity parameters to every system.
         for (ParticleSystem ps : pss) {
             PSControl psc = ps.getPSControl();
             psc.setVelParams(velParams);
         }
     }
 
-    // Método para fazer algo quando uma determinada tecla é pressionada
     @Override
     public void keyPressed(PApplet parent) {}
 
-    // Método para fazer algo quando o rato é pressionado
     @Override
     public void mousePressed(PApplet parent) {
-        // Adiciona um novo sistema de partículas ao clicar com o mouse
+        // Spawn a new particle system where the mouse was clicked.
         double[] ww = plt.getWorldCoord(parent.mouseX, parent.mouseY);
         int color = parent.color(parent.random(255), parent.random(255), parent.random(255));
         PSControl psc = new PSControl(velParams, lifetimeParams, radiusParams, flow, color);
@@ -65,7 +67,6 @@ public class ParticleSystemApp implements IProcessingApp {
         pss.add(ps);
     }
 
-    // Método para fazer algo quando o rato é arrastado
     @Override
     public void mouseDragged(PApplet parent) {}
 }

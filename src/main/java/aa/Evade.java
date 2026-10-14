@@ -3,13 +3,24 @@ package aa;
 import physics.Body;
 import processing.core.PVector;
 
+/**
+ * Steers a boid away from a moving target by predicting its future position.
+ * This is the inverse of the pursuit behavior.
+ */
 public class Evade extends Behavior {
-    // Construtor do comportamento "Evade"
+    /**
+     * Creates a new evade behavior with the specified weight.
+     *
+     * @param weight the steering weight applied to this behavior
+     */
     public Evade(float weight) {
         super(weight);
     }
 
-    // Método "getDesiredVelocity" dedicado para este comportamento
+    /**
+     * Returns the desired velocity that moves the boid away from the predicted
+     * future position of the target.
+     */
     @Override
     public PVector getDesiredVelocity(Boid me) {
         Body bodyTarget = me.eye.target;
